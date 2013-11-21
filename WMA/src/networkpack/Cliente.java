@@ -18,6 +18,9 @@ import DataStructures.controlStructurepack.Cola;
  */
 public class Cliente implements Runnable{
 	
+	public static void main(String[] args) {
+		
+	}
 	/** The _socket. */
 	private Socket _socket;
 	
@@ -53,6 +56,7 @@ public class Cliente implements Runnable{
 	 *
 	 * @return the ip
 	 */
+	
 	private InetAddress getIp(){
 		try {
 			InetAddress direccion = InetAddress.getLocalHost();
@@ -112,7 +116,6 @@ public class Cliente implements Runnable{
 				_error = "No es posible Conectar con el servidor";
 			}
 	}
-
 	/**
 	 * Enviar mensaje.
 	 */
