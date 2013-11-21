@@ -7,5 +7,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WMA/LibreriaRXTX/native"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="LibreriaArduino/Arduinolib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
