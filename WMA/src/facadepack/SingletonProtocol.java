@@ -20,10 +20,9 @@ public class SingletonProtocol {
 	
 	public void Encod_enviar(String pMensaje){
 		String[] msg_recieve=pMensaje.split("%");
+		String toSend=prueba.EncoderCorrespondence(msg_recieve[0], msg_recieve[1], msg_recieve[2], msg_recieve[3]);
 		prueba._from=msg_recieve[4];
 		prueba._to=msg_recieve[5];
-		String toSend=prueba.EncoderCorrespondence(msg_recieve[0], msg_recieve[1], msg_recieve[2], msg_recieve[3]);
-		toSend
 	}
 	
 	
