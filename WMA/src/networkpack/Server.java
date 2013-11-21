@@ -14,8 +14,6 @@ import DataStructures.controlStructurepack.Cola;
  * The Class Server tambien considerada como una clase server.
  */
 public class Server implements Runnable{
-	
-	
 	/** The _servidor. Socket principal de conexi��n*/
 	private static ServerSocket _servidor;
 	
