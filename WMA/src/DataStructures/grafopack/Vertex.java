@@ -16,10 +16,12 @@ public class Vertex <T> implements Serializable
 	 */
 	List< Vertex<T> > _ListaEntradas;
 	
+	
 	/**
 	 * 
 	 */
 	List< Edge<T> > _ListaAristas;
+	
 	
 	/**
 	 * 
