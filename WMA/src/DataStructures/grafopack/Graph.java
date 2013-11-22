@@ -24,10 +24,13 @@ public class Graph <T>
 		Edge<T> tmpedge = new Edge<T>();
 		this._ListAristas.add( tmpedge );
 		
-		System.out.println("Conectando Nodos....");
-		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeSaliente);
-		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeEntrante);
-		System.out.println("Nodo Entrante " + tmpvertexentrante + '\t' + "Nodo Saliente " + tmpvertexsaliente  );
+		System.out.println("-----------------------Conectando Nodos-------------------");
+		
+		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
+		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
+		System.out.println("Nodo Saliente: " + tmpvertexsaliente.getID() + '\t' + "Nodo Entrante: " + tmpvertexentrante.getID() );
+		System.out.println("Nodo Saliente: " + tmpvertexsaliente + "\t \t" + "Nodo Entrante: " + tmpvertexentrante );
+		System.out.println("..........................................................." + "\n");
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
 	}
 	
@@ -46,6 +49,7 @@ public class Graph <T>
 	public Edge<T> searchEdge(String pEdge)
 	{
 		LinkedListIterator<Edge<T>> iterator = this._ListAristas.iterator();
+		
 		Edge<T> result = null;
 		Edge<T> tmp;
 		while(iterator.hasNext())
@@ -82,11 +86,17 @@ public class Graph <T>
 		Graph<Integer> grafo = new Graph<Integer>();
 		grafo.addVertex( 52 );
 		grafo.addVertex( 23 );
-		System.out.println("Vacaciones NO WAY");
+		grafo.addVertex( 50 );
+		grafo.addVertex( 70 );
 		grafo.addEdge("VERTEX@000", "VERTEX@001");
-		grafo.searchVertex("VERTEX@000").getInputs().print();
-		grafo.searchVertex("VERTEX@000").getOutputs().print();
-		grafo.searchVertex("VERTEX@001").getInputs().print();
-		grafo.searchVertex("VERTEX@001").getOutputs().print();
+		grafo.addEdge("VERTEX@002", "VERTEX@003");
+		grafo.addEdge("VERTEX@000", "VERTEX@002");
+		grafo.addEdge("VERTEX@003", "VERTEX@001");
+		grafo.searchVertex("VERTEX@000").printConexiones();
+		grafo.searchEdge("EDGE@000").print();
+		grafo.searchVertex("VERTEX@001").printConexiones();
+		grafo.searchVertex("VERTEX@002").printConexiones();
+		grafo.searchVertex("VERTEX@003").printConexiones();
+		grafo.searchVertex("VERTEX@002").print();
 	}
 }

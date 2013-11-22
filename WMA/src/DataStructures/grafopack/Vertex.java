@@ -37,7 +37,6 @@ public class Vertex <T> implements Serializable
 		this._ListaSalidas = new List<Vertex<T>>();
 		this._Serial = Vertex._VertexCant;
 		this._ID = String.format(Vertex.TYPE + "%03d", this._Serial);
-		System.out.println(this._ID);
 		this._Dato = pDato;
 		Vertex._VertexCant ++;
 	}
@@ -97,7 +96,7 @@ public class Vertex <T> implements Serializable
 	
 	public void print()
 	{
-		System.out.println(this._ID + " contiene el dato: " + this._Dato);
+		System.out.println(this._ID + " contiene el dato: \t" + this._Dato + "\n");
 	}
 	
 	public List<Vertex<T>> getInputs()
@@ -108,5 +107,16 @@ public class Vertex <T> implements Serializable
 	public List<Vertex<T>> getOutputs()
 	{
 		return this._ListaSalidas;
+	}
+	
+	public void printConexiones()
+	{	
+		System.out.println("\t" + this._ID);
+		System.out.println("............................................");
+		System.out.print("Lista Conexiones Entrantes: ");
+		this._ListaEntradas.print();
+		System.out.print("Lista Conexiones Salientes: ");
+		this._ListaSalidas.print();
+		System.out.println("............................................" + "\n");
 	}
 }

@@ -26,7 +26,6 @@ public class Edge <T> implements Serializable
 		this._Peso = pPeso;
 		this._Serial = Edge._CantEdge;
 		this._ID = String.format(Edge.TYPE + "%03d", this._Serial);
-		System.out.println(this._ID);
 		Edge._CantEdge ++;
 	}
 	
@@ -36,10 +35,8 @@ public class Edge <T> implements Serializable
 		this._Salida = pSaliente;
 		this._Entrada = pEntrante;
 		//Conexion de los Nodos
-		System.out.println("\n Referenciando...");
-		
-		this._Salida.conectInput(this._Entrada);
-		this._Entrada.conectOutput(this._Salida);
+		this._Salida.conectOutput(this._Entrada);
+		this._Entrada.conectInput(this._Salida);
 	}
 	
 	@Override
@@ -84,5 +81,14 @@ public class Edge <T> implements Serializable
 		// Remover Aristas
 		this._Salida.disconectEdge(this);
 		this._Entrada.disconectEdge(this);
+	}
+	
+	void print()
+	{
+		System.out.println("ID: " + this._ID );
+		System.out.println("...................................................................");
+		System.out.println("Vertice Saliente: "  + this._Salida.getID() + "\t Vertice Entrante: " + this._Entrada.getID());
+		System.out.println("Vertice Saliente: " + this._Salida.getDato() +  " \t \t Vertice Entrante: " + this._Entrada.getDato());
+		System.out.println();
 	}
 }
