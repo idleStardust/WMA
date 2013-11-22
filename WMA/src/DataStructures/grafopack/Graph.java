@@ -14,9 +14,9 @@ public class Graph <T extends Comparable<T> >
 		this._ListAristas = new List<Edge<T>>() ;
 	}
 	
-	public void addVertex( T pDato )
+	public void addVertex( T pDato, String pEtiqueta )
 	{
-		this._ListVertices.add( new Vertex<T>(pDato) );
+		this._ListVertices.add( new Vertex<T>(pDato, pEtiqueta) );
 	}
 	
 	public void addEdge(String pVerticeSaliente, String pVerticeEntrante)
@@ -113,7 +113,6 @@ public class Graph <T extends Comparable<T> >
 		{
 			tmp = iterator.next();
 			tmp2 = tmp.compareTo(pDato);
-			System.out.println(tmp2);
 			if( tmp2 == 0)
 			{
 				result = tmp;
@@ -126,9 +125,9 @@ public class Graph <T extends Comparable<T> >
 	public static void main(String[] args)
 	{
 		Graph<Integer> grafo = new Graph<Integer>();
-		grafo.addVertex( 52 );
-		grafo.addVertex( 23 );
-		grafo.addVertex( 50 );
+		grafo.addVertex( 52, "Nodin" );
+		grafo.addVertex( 23, "Nodae" );
+		grafo.addVertex( 50, "Nodaa" );
 		
 		grafo.addEdge("VERTEX@000", "VERTEX@001");
 		grafo.addEdge("VERTEX@002", "VERTEX@001");

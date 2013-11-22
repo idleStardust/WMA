@@ -54,7 +54,7 @@ public class Edge <T extends Comparable<T> > implements Serializable
 	@Override
 	public String getType()
 	{
-		return Vertex.TYPE;
+		return Edge.TYPE;
 	}
 	
 	public Vertex<T> getOutput()
