@@ -81,12 +81,12 @@ public class List < T >
 	
 	public void print()
 	{
-		ListNode<T> pivote = this._Head;
+		LinkedListIterator<T> iterator = 
+				new LinkedListIterator<T>(this, this._Head );
 		System.out.print("[ ");
-		while(pivote != null)
+		while(iterator.hasNext())
 		{
-			System.out.print(pivote.getData() + ", ");
-			pivote = pivote.getNext();
+			System.out.print(iterator.next() + ", ");
 		}
 		System.out.println(" ]");
 	}
@@ -97,19 +97,19 @@ public class List < T >
 	 * @return
 	 * @throws ArrayIndexOutOfBoundsException
 	 */
-	public T search(int pIndice) throws ArrayIndexOutOfBoundsException
+	public T search(int pIndice)
 	{
 		if(pIndice < this._Size)
 		{
-			ListNode<T> tmp = this._Head;
-			for(int x =0 ; x < this._Size; x++)
-			{
-				tmp = tmp.getNext();
-			}
-			return tmp.getData();
+			LinkedListIterator<T> iterator = 
+					new LinkedListIterator<T>(this, this._Head );
+			T tmp = iterator.next();
+			for(int x = 0 ; x != pIndice; x++)
+				tmp = iterator.next();
+			return tmp;
 		}
 		else
-			throw new ArrayIndexOutOfBoundsException();
+			throw new ArrayIndexOutOfBoundsException("Indice " + pIndice);
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public class List < T >
 	 * @param pIndex {@link Integer}
 	 * @throws ArrayIndexOutOfBoundsException
 	 */
-	public void remove(int pIndex) throws ArrayIndexOutOfBoundsException
+	public void remove(int pIndex)
 	{
 		if(pIndex < this._Size)
 		{
@@ -152,6 +152,6 @@ public class List < T >
 			this._Size--;
 		}
 		else
-			throw new ArrayIndexOutOfBoundsException("Indice: " + pIndex );
+			throw new ArrayIndexOutOfBoundsException("Indice Incorrecto: " + pIndex );
 	}
 }
