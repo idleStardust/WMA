@@ -17,6 +17,7 @@ import networkpack.protocolpack.Encoder;
 
 
 
+
 public class ClientLogic extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Socket socket;
@@ -24,7 +25,7 @@ public class ClientLogic extends JFrame{
     private String host;
     private String gamerID;
     boolean connected = true;
-    Decoder decoding = new Decoder().getInstance();
+    
     
     
     public ClientLogic(String pHost, int pPort, String pGamer){
@@ -76,7 +77,7 @@ public class ClientLogic extends JFrame{
         
         while (connected) {
         	System.out.println(inputData.readUTF());
-        	decoding.Decode(inputData.readUTF());
+        	
             
         }
     }

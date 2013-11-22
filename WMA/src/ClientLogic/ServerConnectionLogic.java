@@ -8,13 +8,15 @@ import java.net.Socket;
 
 import javax.swing.JTextField;
 
+import networkpack.protocolpack.Decoder;
+
 public class ServerConnectionLogic implements ActionListener{
 	
     private Socket socket; 
     private String gamer;
     private DataOutputStream outputData;
     private JTextField data;
-    
+    private Decoder decoding = new Decoder().getInstance();
     public ServerConnectionLogic(Socket pSocket, JTextField pData, String pGamer) {
     	this.socket = pSocket;
         this.data = pData;
@@ -32,7 +34,10 @@ public class ServerConnectionLogic implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         try {
             outputData.writeUTF(gamer + ": " + data.getText() );
+            System.out.println("verificando entrada"+data.getText());
+        	decoding.Decode(data.getText());
             data.setText("");
+            
         } catch (IOException ex) {
         	System.out.println("Error sending data: " + ex.getMessage());
         }
