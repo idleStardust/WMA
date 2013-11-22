@@ -8,6 +8,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="LibreriaArduino/Arduinolib.jar"/>
-	<classpathentry kind="lib" path="jgraphx/lib/jgraphx.jar"/>
+	<classpathentry kind="lib" path="LibreriaJGraphx/lib/jgraphx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

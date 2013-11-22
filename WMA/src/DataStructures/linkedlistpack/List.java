@@ -2,6 +2,7 @@ package DataStructures.linkedlistpack;
 
 public class List < T >
 {
+	final static int NOTFOUND = -1;
 	private ListNode< T > _Head;
 	private ListNode< T > _Tail;
 	private int _Size;
@@ -153,5 +154,30 @@ public class List < T >
 		}
 		else
 			throw new ArrayIndexOutOfBoundsException("Indice Incorrecto: " + pIndex );
+	}
+
+	public LinkedListIterator<T> iterator()
+	{
+		return new LinkedListIterator<T>(this, this._Head);
+	}
+	
+	public void remove(T pDato)
+	{
+		this.remove( this.search(pDato) );
+	}
+	
+	public int search(T pDato)
+	{
+		int index = List.NOTFOUND;
+		LinkedListIterator<T> iterador = this.iterator();
+		for(int x = 0; iterador.hasNext(); x++)
+		{
+			if( iterador.next().equals(pDato) )
+			{
+				index = x;
+			 	break;
+			}
+		}
+		return index;
 	}
 }
