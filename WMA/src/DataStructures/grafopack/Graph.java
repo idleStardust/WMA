@@ -60,6 +60,27 @@ public class Graph <T extends Comparable<T> >
 		this._ListAristas.add( tmpedge );
 	}
 	
+	public void conect(T pVerticeSaliente, T pVerticeEntrante)
+	{
+		/*------------------------------Preparacion por la adicion--------------------------*/
+		Edge<T> tmpedge = new Edge<T>();
+		
+		
+		//	Busqueda de los vertices correspondientes
+		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
+		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
+		
+		//	Impresion de la conexion
+		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
+		
+		/*----------------------------Asignacion de Referencias-------------------------------*/
+		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
+		tmpvertexentrante.conectEdge(tmpedge);
+		tmpvertexsaliente.conectEdge(tmpedge);
+		
+		//	Adición a la base de datos interna.
+		this._ListAristas.add( tmpedge );
+	}
 	/**
 	 * 
 	 * @param pNodoSaliente {@link Vertex}
@@ -74,8 +95,9 @@ public class Graph <T extends Comparable<T> >
 	}
 	
 	/**
-	 * 
+	 * Elimina por medio de una etiqueta un vertice del grafo.
 	 * @param pEtiqueta {@link String}
+	 * @throws ItemNotFoundException
 	 */
 	public void remove(String pEtiqueta)
 	{
@@ -94,32 +116,6 @@ public class Graph <T extends Comparable<T> >
 			}
 		}
 		//	Removicion de la base de datos interna
-		this._ListVertices.remove(removed);
-	}
-	
-	/**
-	 * IN develop
-	 * @param pDato
-	 */
-	public void remove(T pDato)
-	{
-		//	Busqueda del vertice removido
-		Vertex<T> removed = this.searchVertex(pDato);
-		List<Edge<T>> removeedges = removed.getEdges();
-		if(removeedges != null)
-		{
-			/*-------------------------------Preparacion de Iteradores---------------------*/
-			//	Tipo: Vertex<T>
-			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
-			while(iterator.hasNext())
-			{
-				Edge<T> tmp = iterator.next();
-				this.removeEdge( tmp );
-			}
-		}
-		//	Removicion de la base de datos interna
-		else
-			throw new ItemNotFoundException(pDato.toString());
 		this._ListVertices.remove(removed);
 	}
 	
@@ -179,6 +175,7 @@ public class Graph <T extends Comparable<T> >
 			throw new ItemNotFoundException(pEtiqueta);
 		return result;
 	}
+	
 	
 	/**
 	 * Busca y retorna un vertice que contenda la misma etiqueta que
@@ -251,11 +248,17 @@ public class Graph <T extends Comparable<T> >
 		grafo.conect("Nodin", "Nodae");
 		grafo.conect("Nodaa", "Nodae");
 		grafo.conect("Nodae", "Nodaa");
-		grafo.conect("Nodaa", "Nodin");
 		grafo.printVertex();
-		System.out.print("After....." + "\n");
-		System.out.println("Nodo Buscado " + grafo.searchVertex(23).getID() +" Finish");
-		grafo.printVertex();
+		
+		Graph<Integer> grafe = new Graph<Integer>();
+		grafe.add( 52, "Nodin" );
+		grafe.add( 23, "Nodae" );
+		grafe.add( 50, "Nodaa" );
+		
+		grafe.conect(52, 23);
+		grafe.conect(50, 23);
+		grafe.conect(23, 50);
+		grafe.printVertex();
 	}
 	
 	/**
