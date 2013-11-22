@@ -86,12 +86,12 @@ public class List < T > implements Iterable<T>
 	{
 		ListIterator<T> iterator = 
 				this.iterator();
-		System.out.print("[ ");
+		System.out.print("[\t");
 		while(iterator.hasNext())
 		{
-			System.out.print(iterator.next() + ", ");
+			System.out.print(iterator.next() + ",\t");
 		}
-		System.out.println(" ]");
+		System.out.println("\t]");
 	}
 	
 	/**

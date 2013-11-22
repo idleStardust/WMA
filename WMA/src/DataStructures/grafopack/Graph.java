@@ -302,29 +302,6 @@ public class Graph <T extends Comparable<T> >
 		return result;
 	}
 	
-	public static void main(String[] args)
-	{
-		Graph<Integer> grafo = new Graph<Integer>();
-		grafo.add( 52, "Nodin" );
-		grafo.add( 23, "Nodae" );
-		grafo.add( 50, "Nodaa" );
-		
-		grafo.conect("Nodin", "Nodae");
-		grafo.conect("Nodaa", "Nodae");
-		grafo.conect("Nodae", "Nodaa");
-		grafo.disconnect("Noddin", "Nodae");
-		grafo.printVertex();
-		
-		Graph<Integer> grafe = new Graph<Integer>();
-		grafe.add( 52, "Nodin" );
-		grafe.add( 23, "Nodae" );
-		grafe.add( 50, "Nodaa" );
-		
-		grafe.conect("Nodaa", "Nodae");
-		grafe.conect("Nodae", "Nodaa");
-		grafe.printVertex();
-	}
-	
 	/**
 	 * Imprime las conexiones que cada vertices presenta. Sus listas de entradas y de salidas.
 	 */
