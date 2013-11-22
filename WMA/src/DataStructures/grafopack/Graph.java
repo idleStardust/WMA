@@ -148,18 +148,52 @@ public class Graph <T extends Comparable<T> >
 	}
 	
 	/**
-	 * Elimina una arista por medio de una etiqueta dada.
+	 * Elimina una arista por medio de dos etiqueta dadas.
 	 * @param pEdge {@link String}
 	 * @throws ItemNotFoundException
-	 * @version 1.3 (Vie 2:41 AM)
-	 * @deprecated
+	 * @version 1.4 (Vie 2:41 AM)
 	 */
-	public void disconnect(String pEdge)
+	public void disconnect(String pEtiqueta, String pOtraEtiqueta)
 	{
-		//Busqueda y eliminacion de una arista.
-		this.removeEdge(this.searchEdgeID(pEdge));
+		Vertex<T> vertex1 = this.searchVertexID(pEtiqueta);
+		Vertex<T> vertex2 = this.searchVertexID(pOtraEtiqueta);
+		Edge<T> edge = this.searchEdge(vertex1, vertex2);
+		edge.disconect();
 	}
 	
+	
+	/**
+	 * Elimina una arista por medio de dos datos dados.
+	 * @param pEdge {@link String}
+	 * @throws ItemNotFoundException
+	 * @version 1.4 (Vie 2:41 AM)
+	 */
+	public void disconnect(T pDato, T pOtroDato)
+	{
+		Vertex<T> vertex1 = this.searchVertex(pDato);
+		Vertex<T> vertex2 = this.searchVertex(pOtroDato);
+		Edge<T> edge = this.searchEdge(vertex1, vertex2);
+		edge.disconect();
+	}
+	
+	
+	protected Edge<T> searchEdge(Vertex<T> pVertexSaliente, Vertex<T> pVertexEntrante)
+	{
+		ListIterator<Edge<T>> iteratorOut = pVertexSaliente.getEdges().iterator();
+		ListIterator<Edge<T>> iteratorIn = pVertexEntrante.getEdges().iterator();
+		while(iteratorOut.hasNext())
+		{
+			Edge<T> tmpOut = iteratorOut.next();
+			while(iteratorIn.hasNext())
+			{
+				Edge<T> tmpIn = iteratorIn.next();
+				if(tmpOut.equals(tmpIn))
+					return tmpIn;
+			}
+		}
+		throw new ItemNotFoundException("Arista Buscada");
+		
+	}
 	/**
 	 * Elimina una arista del grafo y desconecta la referencias 
 	 * entre vertices.
@@ -181,6 +215,7 @@ public class Graph <T extends Comparable<T> >
 	 * @version 1.2 (Vie 1:36 AM)
 	 * @throws ItemNotFoundException
 	 */
+	@SuppressWarnings("unused")
 	private Edge<T> searchEdgeID(String pEtiqueta)
 	{
 		/*-------------------------------Preparacion de Iteradores---------------------*/
@@ -277,6 +312,7 @@ public class Graph <T extends Comparable<T> >
 		grafo.conect("Nodin", "Nodae");
 		grafo.conect("Nodaa", "Nodae");
 		grafo.conect("Nodae", "Nodaa");
+		grafo.disconnect("Noddin", "Nodae");
 		grafo.printVertex();
 		
 		Graph<Integer> grafe = new Graph<Integer>();
@@ -284,10 +320,8 @@ public class Graph <T extends Comparable<T> >
 		grafe.add( 23, "Nodae" );
 		grafe.add( 50, "Nodaa" );
 		
-		grafe.conect(52, 23);
-		grafe.conect(50, 23);
-		grafe.conect(23, 50);
-		grafe.remove(52);
+		grafe.conect("Nodaa", "Nodae");
+		grafe.conect("Nodae", "Nodaa");
 		grafe.printVertex();
 	}
 	
@@ -311,5 +345,15 @@ public class Graph <T extends Comparable<T> >
 	public GraphIterator<T> iterator(T pVertex)
 	{
 		return new GraphIterator<T>(this, pVertex);
+	}
+	
+	public T search(String pEtiqueta)
+	{
+		return this.searchVertexID(pEtiqueta).getDato();
+	}
+	
+	public String search(T pDato)
+	{
+		return this.searchVertex(pDato).getID();
 	}
 }
