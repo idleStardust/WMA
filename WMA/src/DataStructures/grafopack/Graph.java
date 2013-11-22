@@ -8,20 +8,27 @@ public class Graph <T>
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
 	
-	Graph()
+	public Graph()
 	{
 		this._ListVertices = new List<Vertex<T>>() ;
 		this._ListAristas = new List<Edge<T>>() ;
 	}
 	
-	public void addVertex(String pVertex)
+	public void addVertex( T pDato )
 	{
-		
+		this._ListVertices.add( new Vertex<T>(pDato) );
 	}
 	
-	public void addEdge(String pEdge)
+	public void addEdge(String pVerticeSaliente, String pVerticeEntrante)
 	{
+		Edge<T> tmpedge = new Edge<T>();
+		this._ListAristas.add( tmpedge );
 		
+		System.out.println("Conectando Nodos....");
+		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeSaliente);
+		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeEntrante);
+		System.out.println("Nodo Entrante " + tmpvertexentrante + '\t' + "Nodo Saliente " + tmpvertexsaliente  );
+		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
 	}
 	
 	public void removeVertex(String pVertex)
@@ -36,7 +43,7 @@ public class Graph <T>
 		this._ListAristas.remove(removed);
 	}
 	
-	Edge<T> searchEdge(String pEdge)
+	public Edge<T> searchEdge(String pEdge)
 	{
 		LinkedListIterator<Edge<T>> iterator = this._ListAristas.iterator();
 		Edge<T> result = null;
@@ -53,7 +60,7 @@ public class Graph <T>
 		return result;
 	}
 	
-	Vertex <T> searchVertex(String pEdge)
+	public Vertex <T> searchVertex(String pVertex)
 	{
 		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
@@ -61,12 +68,25 @@ public class Graph <T>
 		while(iterator.hasNext())
 		{
 			tmp = iterator.next();
-			if(tmp.getID().equalsIgnoreCase(pEdge))
+			if(tmp.getID().equalsIgnoreCase(pVertex))
 			{
 				result = tmp;
 				break;
 			}
 		}
 		return result;
+	}
+	
+	public static void main(String[] args)
+	{
+		Graph<Integer> grafo = new Graph<Integer>();
+		grafo.addVertex( 52 );
+		grafo.addVertex( 23 );
+		System.out.println("Vacaciones NO WAY");
+		grafo.addEdge("VERTEX@000", "VERTEX@001");
+		grafo.searchVertex("VERTEX@000").getInputs().print();
+		grafo.searchVertex("VERTEX@000").getOutputs().print();
+		grafo.searchVertex("VERTEX@001").getInputs().print();
+		grafo.searchVertex("VERTEX@001").getOutputs().print();
 	}
 }
