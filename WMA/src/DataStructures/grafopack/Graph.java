@@ -88,7 +88,7 @@ public class Graph <T extends Comparable<T> >
 	 * @param pNodoSaliente {@link Vertex}
 	 * @param pNodoEntrante {@link Vertex}
 	 */
-	protected void printEdgeConection(Vertex<T> pNodoSaliente, Vertex<T> pNodoEntrante)
+	public void printEdgeConection(Vertex<T> pNodoSaliente, Vertex<T> pNodoEntrante)
 	{
 		System.out.println("-----------------------Conectando Nodos-------------------");
 		System.out.println("Nodo Saliente: " + pNodoSaliente.getID() + '\t'  +  "Nodo Entrante: " + pNodoEntrante.getID() );
@@ -328,7 +328,7 @@ public class Graph <T extends Comparable<T> >
 	/**
 	 * Imprime las conexiones que cada vertices presenta. Sus listas de entradas y de salidas.
 	 */
-	protected void printVertex()
+	public void printVertex()
 	{
 		ListIterator< Vertex<T> > iterator = this._ListVertices.iterator();
 		while(iterator.hasNext())
@@ -355,5 +355,15 @@ public class Graph <T extends Comparable<T> >
 	public String search(T pDato)
 	{
 		return this.searchVertex(pDato).getID();
+	}
+	
+	public void runDijkstra(T pVerticeInicial)
+	{
+		
+	}
+	
+	public void runFloyd()
+	{
+		
 	}
 }
