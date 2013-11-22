@@ -11,6 +11,7 @@ public class Decoder {
 		return _singletonDecoder;
 	}
 
+	
 	public void Decode(String pMensaje){
 		System.out.println("Mensaje a decodificar"+pMensaje);
 		String[] msg_recieve=pMensaje.split("%");

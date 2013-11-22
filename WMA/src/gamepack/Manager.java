@@ -20,25 +20,26 @@ public class Manager {
 	
 	public String crearRegion(){
 		NormalRegion region = new NormalRegion(_ip, null);
-		_dominio.addVertex(region);
+		
+		_dominio.add(region,region.getID());
 		return region.getID();
 	}
 	
 	public String crearRegion(Arduino pArduino){
 		NormalRegion region = new NormalRegion(_ip, pArduino);
-		_dominio.addVertex(region);
+		_dominio.add(region,region.getID());
 		return region.getID();
 	}
 	
 	public String crearRegion(String pIp){
 		NormalRegion region = new NormalRegion(pIp, null);
-		_dominio.addVertex(region);
+		_dominio.add(region,region.getID());
 		return region.getID();
 	}
 	
 	public String crearRegion(String pIp,Arduino pArduino){
 		NormalRegion region = new NormalRegion(pIp, pArduino);
-		_dominio.addVertex(region);
+		_dominio.add(region,region.getID());
 		return region.getID();
 	}
 	

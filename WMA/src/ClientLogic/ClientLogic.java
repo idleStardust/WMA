@@ -77,6 +77,12 @@ public class ClientLogic extends JFrame{
         
         while (connected) {
         	System.out.println(inputData.readUTF());
+        	String msg=inputData.readUTF();
+        	msg=msg.replaceFirst("cliente: ", "");
+        	System.out.println("mensaje recibido"+msg);
+        	//decoding.Decode(msg);
+        	//System.out.println(inputData.readUTF());
+            
         	
             
         }
