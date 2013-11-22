@@ -1,5 +1,7 @@
 package DataStructures.linkedlistpack;
 
+import DataStructures.exceptions.ItemNotFoundException;
+
 public class List < T > implements Iterable<T>
 {
 	final static int NOTFOUND = -1;
@@ -178,6 +180,7 @@ public class List < T > implements Iterable<T>
 			 	break;
 			}
 		}
+		if(index == List.NOTFOUND) throw new ItemNotFoundException(pDato.toString());
 		return index;
 	}
 	
@@ -199,5 +202,18 @@ public class List < T > implements Iterable<T>
 			}
 		}
 		return state;
+	}
+	
+	public void set(T pDato, int pIndice)
+	{
+		if(pIndice < this._Size)
+		{
+			ListNode<T> tmp = this.getHead();
+			for(int x = 0 ; x < pIndice; x++)
+				tmp = tmp.getNext();
+			tmp.setData(pDato);
+		}
+		else
+			throw new IndexOutOfBoundsException("Indice " + pIndice);
 	}
 }
