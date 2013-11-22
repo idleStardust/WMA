@@ -351,4 +351,9 @@ public class Graph <T extends Comparable<T> >
 	{
 		return this.searchVertexID(pEtiqueta).getDato();
 	}
+	
+	public String search(T pDato)
+	{
+		return this.searchVertex(pDato).getID();
+	}
 }
