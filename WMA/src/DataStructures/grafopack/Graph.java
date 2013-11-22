@@ -1,10 +1,12 @@
 package DataStructures.grafopack;
 
+import java.util.Iterator;
+
 import DataStructures.exceptions.ItemNotFoundException;
-import DataStructures.linkedlistpack.LinkedListIterator;
+import DataStructures.linkedlistpack.ListIterator;
 import DataStructures.linkedlistpack.List;
 
-public class Graph <T extends Comparable<T> >
+public class Graph <T extends Comparable<T> > implements Iterable<T>
 {
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
@@ -109,7 +111,7 @@ public class Graph <T extends Comparable<T> >
 		{
 			/*-------------------------------Preparacion de Iteradores---------------------*/
 			//	Tipo: Vertex<T>
-			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
+			ListIterator< Edge<T> > iterator = removed.getEdges().iterator();
 			while(iterator.hasNext())
 			{
 				Edge<T> tmp = iterator.next();
@@ -135,7 +137,7 @@ public class Graph <T extends Comparable<T> >
 		{
 			/*-------------------------------Preparacion de Iteradores---------------------*/
 			//	Tipo: Vertex<T>
-			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
+			ListIterator< Edge<T> > iterator = removed.getEdges().iterator();
 			while(iterator.hasNext())
 			{
 				Edge<T> tmp = iterator.next();
@@ -184,7 +186,7 @@ public class Graph <T extends Comparable<T> >
 	{
 		/*-------------------------------Preparacion de Iteradores---------------------*/
 		//	Tipo: Edge<T>
-		LinkedListIterator<Edge<T>> iterator = this._ListAristas.iterator();
+		ListIterator<Edge<T>> iterator = this._ListAristas.iterator();
 		Edge<T> result = null;
 		Edge<T> tmp;
 		
@@ -213,11 +215,11 @@ public class Graph <T extends Comparable<T> >
 	 * @version 1.1 (Vie 1:24 AM)
 	 * @return Vertex T
 	 */
-	private Vertex <T> searchVertexID(String pEtiqueta)
+	protected Vertex <T> searchVertexID(String pEtiqueta)
 	{
 		/*-------------------------------Preparacion de Iteradores---------------------*/
 		//	Tipo: Vertex<T>
-		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
+		ListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
 		Vertex <T> tmp;
 		
@@ -244,10 +246,10 @@ public class Graph <T extends Comparable<T> >
 	 * @version 1.1 (Vie 1:32 AM)
 	 * @throws ItemNotFoundException
 	 */
-	private Vertex <T> searchVertex(T pDato)
+	protected Vertex <T> searchVertex(T pDato)
 	{
 		/*----------------------------Preparacion de Iteradores---------------------------*/
-		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
+		ListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
 		Vertex <T> tmp;
 		//=====================================Busqueda===================================/
@@ -295,10 +297,16 @@ public class Graph <T extends Comparable<T> >
 	 */
 	protected void printVertex()
 	{
-		LinkedListIterator< Vertex<T> > iterator = this._ListVertices.iterator();
+		ListIterator< Vertex<T> > iterator = this._ListVertices.iterator();
 		while(iterator.hasNext())
 		{
 			iterator.next().printConexiones();
 		}
+	}
+
+	@Override
+	public Iterator<T> iterator()
+	{
+		return null;
 	}
 }
