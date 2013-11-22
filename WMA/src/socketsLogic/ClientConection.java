@@ -40,7 +40,7 @@ public class ClientConection extends Thread implements Observer {
 
 				data.setData(dataReceived);
 			} catch (IOException ex) {
-				System.out.println("IP Gamer "
+				System.out.println("Client "
 						+ socket.getInetAddress().getHostName()
 						+ " disconnected.");
 				conectado = false;

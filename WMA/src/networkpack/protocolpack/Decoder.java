@@ -12,6 +12,7 @@ public class Decoder {
 	}
 
 	public void Decode(String pMensaje){
+		System.out.println("Mensaje a decodificar"+pMensaje);
 		String[] msg_recieve=pMensaje.split("%");
 		System.out.println("rev lenght"+msg_recieve.length);
 		System.out.println(msg_recieve[0]);
