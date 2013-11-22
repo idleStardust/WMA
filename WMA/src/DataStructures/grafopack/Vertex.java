@@ -4,9 +4,9 @@ import DataStructures.linkedlistpack.List;
 
 public class Vertex <T> implements Serializable
 {
-	final static String TYPE = "Vertex";
+	final static String TYPE = "VERTEX@";
 	
-	static int _VertexCant;
+	static int _VertexCant = 0;
 	
 	int _Serial;
 	String _ID;
@@ -28,6 +28,14 @@ public class Vertex <T> implements Serializable
 	 */
 	List< Vertex<T> > _ListaSalidas;
 	
+	Vertex()
+	{
+		this._Serial = Vertex._VertexCant;
+		this._ID = String.format(Vertex.TYPE + "%03d", this._Serial);
+		System.out.println(this._ID);
+		Vertex._VertexCant ++;
+	}
+	
 	@Override
 	public String getID()
 	{
@@ -46,23 +54,28 @@ public class Vertex <T> implements Serializable
 		return Vertex.TYPE;
 	}
 	
-	void conectInput(Vertex<T> pVertex)
+	public void conectInput(Vertex<T> pVertex)
 	{
 		this._ListaEntradas.add(pVertex);
 	}
 	
-	void conectOutput(Vertex<T> pVertex)
+	public void conectOutput(Vertex<T> pVertex)
 	{
 		this._ListaSalidas.add(pVertex);
 	}
 	
-	void disconectInput( Vertex<T> pVertex )
+	public void disconectInput( Vertex<T> pVertex )
 	{
 		this._ListaEntradas.remove( pVertex );
 	}
 	
-	void disconectOutput( Vertex<T> pVertex )
+	public void disconectOutput( Vertex<T> pVertex )
 	{
 		this._ListaSalidas.remove( pVertex );
+	}
+	
+	public void disconectEdge( Edge<T> pEdge )
+	{
+		this._ListaAristas.remove(pEdge);
 	}
 }

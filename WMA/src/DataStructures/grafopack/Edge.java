@@ -3,7 +3,7 @@ package DataStructures.grafopack;
 public class Edge <T> implements Serializable
 {
 	// Tipo de Objeto 
-	final static String TYPE = "Edge";
+	final static String TYPE = "EDGE@";
 
 	// Cantidad de Vertices
 	static int _CantEdge = 0;
@@ -24,6 +24,10 @@ public class Edge <T> implements Serializable
 	public Edge(int pPeso)
 	{
 		this._Peso = pPeso;
+		this._Serial = Edge._CantEdge;
+		this._ID = String.format(Edge.TYPE + "%03d", this._Serial);
+		System.out.println(this._ID);
+		Edge._CantEdge ++;
 	}
 	
 	public void conect( Vertex<T> pSaliente, Vertex<T> pEntrante )
@@ -67,5 +71,16 @@ public class Edge <T> implements Serializable
 	public int getWeigth()
 	{
 		return this._Peso;
+	}
+	
+	public void disconect()
+	{
+		//Remover Referencias
+		this._Salida.disconectInput(this._Entrada);
+		this._Entrada.disconectOutput(this._Salida);
+		
+		// Remover Aristas
+		this._Salida.disconectEdge(this);
+		this._Entrada.disconectEdge(this);
 	}
 }
