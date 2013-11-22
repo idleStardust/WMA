@@ -2,7 +2,7 @@ package gamepack;
 
 import DataStructures.grafopack.*;
 public class Manager {
-	private String _ip;
+	private String _ip = "192.168.1.1";
 	
 	private Graph<Dominio> _supergrafo;
 	
