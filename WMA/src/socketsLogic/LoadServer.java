@@ -6,14 +6,12 @@ import java.net.Socket;
 
 
 public class LoadServer {
-	 LoadServer(){
-     	
+	 public LoadServer(){
 		 int port = 1238; 
 	        int maxGamers = 1000; 
 	        ServerSocket server = null; 
 	        Socket socket = null;
 	        TrafficLogic data = new TrafficLogic();
-	        
 	        try {
 	           
 	        	server = new ServerSocket(port, maxGamers);

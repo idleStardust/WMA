@@ -1,5 +1,6 @@
 package ClientLogic;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagLayout;
 import java.io.DataInputStream;
@@ -14,23 +15,21 @@ import javax.swing.JTextField;
 
 
 public class FabricaCliente extends JFrame{
-
 	private static final long serialVersionUID = 1L;
 	private Socket socket;
     private int port;
     private String host;
-    private String gamer;
+    private String gamerID;
     
     public FabricaCliente(String pHost, int pPort, String pGamer){
-        super("Starnet");
-        
+        super("Chat de prueba");
     	this.host = pHost;
     	this.port = pPort;
-    	this.gamer = pGamer;
+    	this.gamerID = pGamer;
     	
         
         JTextField tfData = new JTextField("", 20);
-        JButton btSend = new JButton("send");
+        JButton btSend = new JButton("Enviar");
 
         Container c = this.getContentPane();
         c.setLayout(new GridBagLayout());
@@ -38,7 +37,7 @@ public class FabricaCliente extends JFrame{
         c.add(tfData);
        
         c.add(btSend);
-        
+       
         this.setBounds(400, 100, 400, 100);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
@@ -51,7 +50,7 @@ public class FabricaCliente extends JFrame{
         	System.out.println("Error Connecting to server (" + ex.getMessage() + ").");
         }
         
-        btSend.addActionListener(new ServerConnectionLogic(socket, tfData, gamer));
+        btSend.addActionListener(new ServerConnectionLogic(socket, tfData, gamerID));
         
     }
     
