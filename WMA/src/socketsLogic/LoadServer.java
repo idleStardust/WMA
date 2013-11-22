@@ -23,7 +23,7 @@ public class LoadServer {
 	            while (true) {
 	                System.out.println("waiting for new clients");
 	                socket = server.accept();
-	                System.out.println("IP Gamer " + socket.getInetAddress().getHostName() + " connected.");
+	                System.out.println("client " + socket.getInetAddress().getHostName() + " connected.");
 	                
 	                ClientConection gc = new ClientConection(socket, data);
 	                gc.start();
@@ -40,8 +40,7 @@ public class LoadServer {
 	            }
 	        }
 	    }
+}
 	 
-	 DesconectarCliente()
-     	
-     }
+	 
 
