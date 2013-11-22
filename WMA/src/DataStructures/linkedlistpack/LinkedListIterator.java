@@ -30,22 +30,7 @@ public class LinkedListIterator<E> implements Iterator<E>
 	@Override
 	public void remove()
 	{
-		if(this._Current.getNext() == null && this._Current.getPrev() == null)
-		{
-			
-		}
-		else if(this._Current.getNext() == null)
-		{
-			
-		}
-		else if(this._Current.getPrev() == null)
-		{
-			
-		}
-		else
-		{
-			
-		}
+		this._Lista.remove(this._Current.getData());
 	}
 	
 }
