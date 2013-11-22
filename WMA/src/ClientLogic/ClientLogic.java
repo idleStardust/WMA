@@ -17,6 +17,7 @@ import networkpack.protocolpack.Encoder;
 
 
 
+
 public class ClientLogic extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Socket socket;
