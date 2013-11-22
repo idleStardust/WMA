@@ -1,13 +1,13 @@
 package DataStructures.exceptions;
 
-public class ItemNotFound extends RuntimeException
+public class ItemNotFoundException extends RuntimeException
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ItemNotFound(String pElemento) 
+	public ItemNotFoundException(String pElemento) 
 	{
 		super("Elemento: " + pElemento + " no se encuentra en la coleccion");
 	}
