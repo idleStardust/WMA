@@ -1,12 +1,11 @@
 package DataStructures.grafopack;
 
-import java.util.Iterator;
 
 import DataStructures.exceptions.ItemNotFoundException;
 import DataStructures.linkedlistpack.ListIterator;
 import DataStructures.linkedlistpack.List;
 
-public class Graph <T extends Comparable<T> > implements Iterable<T>
+public class Graph <T extends Comparable<T> >
 {
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
@@ -303,10 +302,14 @@ public class Graph <T extends Comparable<T> > implements Iterable<T>
 			iterator.next().printConexiones();
 		}
 	}
-
-	@Override
-	public Iterator<T> iterator()
+	
+	public GraphIterator<T> iterator(String pVertex)
 	{
-		return null;
+		return new GraphIterator<T>(this, pVertex);
+	}
+	
+	public GraphIterator<T> iterator(T pVertex)
+	{
+		return new GraphIterator<T>(this, pVertex);
 	}
 }
