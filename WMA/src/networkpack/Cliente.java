@@ -17,10 +17,6 @@ import DataStructures.controlStructurepack.Cola;
  * The Class Cliente.
  */
 public class Cliente implements Runnable{
-	
-	public static void main(String[] args) {
-		
-	}
 	/** The _socket. */
 	private Socket _socket;
 	
@@ -34,7 +30,7 @@ public class Cliente implements Runnable{
 	private DataOutputStream _salida;
 	
 	/** The _ip. */
-	private InetAddress _ip = getIp();
+	private InetAddress _ip = getAddress();
 	
 	/** The _mensaje. */
 	private String _mensaje;
@@ -57,7 +53,7 @@ public class Cliente implements Runnable{
 	 * @return the ip
 	 */
 	
-	private InetAddress getIp(){
+	private InetAddress getAddress(){
 		try {
 			InetAddress direccion = InetAddress.getLocalHost();
 			return direccion;
@@ -67,6 +63,10 @@ public class Cliente implements Runnable{
 			return null;
 		}
 	}
+	public String getIp(){
+		return _ip.getHostAddress();
+	}
+	
 	
 	public void CrearCliente(){
 		try {
@@ -91,7 +91,8 @@ public class Cliente implements Runnable{
 				_recibido = _entrada.readUTF();
 				_mensajesEntrada.Enqueue(TheCreator.getInstance().BuildDato(_recibido));
 				a = cast.ParseToString(_mensajesEntrada.Dequeue());
-				Decoder.getInstance().Decode(a);
+				System.out.println(a);
+				//Decoder.getInstance().Decode(a);
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {}

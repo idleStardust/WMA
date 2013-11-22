@@ -60,6 +60,12 @@ public class Server implements Runnable{
 		}
 	}
 	
+	public static void main(String[] args) {
+		Server ser = new Server();
+		ser.CrearServer();
+		new Thread(ser).start();
+	}
+	
 	@Override
 	public void run(){
 
@@ -74,6 +80,7 @@ public class Server implements Runnable{
 					conect = (Conector)_conexiones.Dequeue();
 					_conexiones.Enqueue(conect);
 					conect.Enviar(_recibido);
+					conect.Enviar("conexion");
 				}
 			}
 		}
