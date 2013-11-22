@@ -3,7 +3,7 @@ package DataStructures.grafopack;
 
 import DataStructures.linkedlistpack.List;
 
-public class Vertex <T> implements Serializable
+public class Vertex <T extends Comparable<T> > implements Serializable, Comparable<T>
 {
 	final static String TYPE = "VERTEX@";
 	
@@ -115,7 +115,7 @@ public class Vertex <T> implements Serializable
 	{
 		return this._ListaEntradas;
 	}
-	
+
 	public List<Vertex<T>> getOutputs()
 	{
 		return this._ListaSalidas;
@@ -135,5 +135,11 @@ public class Vertex <T> implements Serializable
 		System.out.print("Lista Conexiones Salientes: ");
 		this._ListaSalidas.print();
 		System.out.println("............................................" + "\n");
+	}
+
+	@Override
+	public int compareTo(T o)
+	{
+		return this._Dato.compareTo(o);			
 	}
 }

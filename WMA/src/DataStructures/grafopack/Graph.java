@@ -3,7 +3,7 @@ package DataStructures.grafopack;
 import DataStructures.linkedlistpack.LinkedListIterator;
 import DataStructures.linkedlistpack.List;
 
-public class Graph <T>
+public class Graph <T extends Comparable<T> >
 {
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
@@ -102,6 +102,27 @@ public class Graph <T>
 		return result;
 	}
 	
+	public Vertex <T> searchVertex(T pDato)
+	{
+		this._ListVertices.print();
+		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
+		Vertex <T> result = null;
+		Vertex <T> tmp;
+		int tmp2;
+		while(iterator.hasNext())
+		{
+			tmp = iterator.next();
+			tmp2 = tmp.compareTo(pDato);
+			System.out.println(tmp2);
+			if( tmp2 == 0)
+			{
+				result = tmp;
+				break;
+			}
+		}
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		Graph<Integer> grafo = new Graph<Integer>();
@@ -114,9 +135,8 @@ public class Graph <T>
 		grafo.addEdge("VERTEX@001", "VERTEX@002");
 		grafo.addEdge("VERTEX@002", "VERTEX@000");
 		grafo.printVertex();
-		
 		System.out.print("After....." + "\n");
-		grafo.removeVertex("VERTEX@002");
+		System.out.println("Nodo Buscado " + grafo.searchVertex(23).getID() +" Finish");
 		grafo.printVertex();
 	}
 	

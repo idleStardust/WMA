@@ -1,6 +1,6 @@
 package DataStructures.grafopack;
 
-public class Edge <T> implements Serializable
+public class Edge <T extends Comparable<T> > implements Serializable
 {
 	// Tipo de Objeto 
 	final static String TYPE = "EDGE@";
