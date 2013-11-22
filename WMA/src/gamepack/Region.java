@@ -1,6 +1,6 @@
 package gamepack;
 
-public abstract class Region {
+public abstract class Region implements Comparable<Region>{
 	private static int _serial;
 	private String _id;
 	private String _domain;
@@ -26,4 +26,15 @@ public abstract class Region {
 		return "ID:" + getID() + "#" + "Domain:" + _domain;
 	}
 	public abstract String getTipo();
+	
+	@Override
+	public int compareTo(Region pRegion) {
+		if (getID().compareTo(pRegion.getID())< 0){
+			return -1;
+		}
+		else if (getID().compareTo(pRegion.getID()) > 0){
+			return 1;
+		}
+		return 0;
+	}
 }

@@ -17,6 +17,12 @@ public class RegionServer extends Region{
 		_cazador = pCazador;
 	}
 	
+	public Cazador resetHunter(){
+		Cazador tmp = _cazador;
+		_cazador = null;
+		return tmp;
+	}
+	
 	@Override
 	public String getTipo() {
 		// TODO Auto-generated method stub
@@ -26,10 +32,4 @@ public class RegionServer extends Region{
 	public String toString(){
 		return super.toString();
 	}
-	
-	public static void main(String[] args) {
-		RegionServer node = new RegionServer("533","192.168.1.1");
-		System.out.println(node.toString());
-	}
-
 }

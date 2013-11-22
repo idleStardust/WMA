@@ -8,21 +8,27 @@ public class NormalRegion extends Region{
 		_arduino = pArduino;
 		// TODO Auto-generated constructor stub
 	}
+	
 	public NormalRegion(String pRegion, String pDomain,Arduino pArduino) {
 		super("node",pRegion,pDomain);
 		_arduino = pArduino;
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public String getTipo() {
 		// TODO Auto-generated method stub
 		return "node";
 	}
 	
+	public void AssingArduino(Arduino pArduino){
+		_arduino = pArduino;
+	}
+	
 	public String toString(){
 		return super.toString();
 	}
+	
 	public String ArduinoToString (){
 		if (tieneArduino()){
 			return _arduino.toString();
