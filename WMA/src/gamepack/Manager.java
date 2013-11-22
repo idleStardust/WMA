@@ -43,7 +43,7 @@ public class Manager {
 	}
 	
 	public void crearArduino(int pPuntos, String pId){
-		Region region = _dominio.searchVertex(pId).getDato();
+		Region region = _dominio.search(pId).getDato();
 		if ("node".equals(region.getTipo())){
 			Arduino arduino = new Arduino(pPuntos);
 			((NormalRegion)region).AssingArduino(arduino);
@@ -53,7 +53,7 @@ public class Manager {
 	public void crearHunter(String pId,String pIdNode){
 		
 		Cazador cazador = new Cazador();
-		Region region = _dominio.searchVertex(pId).getDato();
+		Region region = _dominio.search(pId).getDato();
 		//cazador.setHomeRegion(region.);
 		if ("node".equals("")){
 			

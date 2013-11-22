@@ -2,16 +2,16 @@ package DataStructures.linkedlistpack;
 
 import java.util.Iterator;
 
-public class LinkedListIterator<E> implements Iterator<E>
+public class ListIterator<E> implements Iterator<E>
 {
 	List<E> _Lista;
 	ListNode<E> _Current;
 	
-	public LinkedListIterator( List<E> pLista, ListNode<E> pFirst ) 
+	public ListIterator( List<E> pLista) 
 	{
 		this._Lista = pLista;
 		this._Current = new ListNode<E>(null);
-		this._Current.setNext(pFirst);
+		this._Current.setNext(pLista.getHead());
 	}
 	
 	@Override

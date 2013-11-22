@@ -1,6 +1,6 @@
 package DataStructures.linkedlistpack;
 
-public class List < T >
+public class List < T > implements Iterable<T>
 {
 	final static int NOTFOUND = -1;
 	private ListNode< T > _Head;
@@ -82,8 +82,8 @@ public class List < T >
 	
 	public void print()
 	{
-		LinkedListIterator<T> iterator = 
-				new LinkedListIterator<T>(this, this._Head );
+		ListIterator<T> iterator = 
+				this.iterator();
 		System.out.print("[ ");
 		while(iterator.hasNext())
 		{
@@ -102,15 +102,14 @@ public class List < T >
 	{
 		if(pIndice < this._Size)
 		{
-			LinkedListIterator<T> iterator = 
-					new LinkedListIterator<T>(this, this._Head );
+			ListIterator<T> iterator = this.iterator();
 			T tmp = iterator.next();
 			for(int x = 0 ; x != pIndice; x++)
 				tmp = iterator.next();
 			return tmp;
 		}
 		else
-			throw new ArrayIndexOutOfBoundsException("Indice " + pIndice);
+			throw new IndexOutOfBoundsException("Indice " + pIndice);
 	}
 	
 	/**
@@ -153,12 +152,13 @@ public class List < T >
 			this._Size--;
 		}
 		else
-			throw new ArrayIndexOutOfBoundsException("Indice Incorrecto: " + pIndex );
+			throw new IndexOutOfBoundsException("Indice Incorrecto: " + pIndex );
 	}
-
-	public LinkedListIterator<T> iterator()
+	
+	@Override
+	public ListIterator<T> iterator()
 	{
-		return new LinkedListIterator<T>(this, this._Head);
+		return new ListIterator<T>(this);
 	}
 	
 	public void remove(T pDato)
@@ -169,7 +169,7 @@ public class List < T >
 	public int search(T pDato)
 	{
 		int index = List.NOTFOUND;
-		LinkedListIterator<T> iterador = this.iterator();
+		ListIterator<T> iterador = this.iterator();
 		for(int x = 0; iterador.hasNext(); x++)
 		{
 			if( iterador.next().equals(pDato) )
@@ -179,5 +179,25 @@ public class List < T >
 			}
 		}
 		return index;
+	}
+	
+	protected ListNode<T> getHead()
+	{
+		return this._Head;
+	}
+	
+	public boolean contains(T pDato)
+	{
+		boolean state = false;
+		ListIterator<T> iterador = this.iterator();
+		while(iterador.hasNext())
+		{
+			if( iterador.next().equals(pDato) )
+			{
+				state = true;
+				break;
+			}
+		}
+		return state;
 	}
 }
