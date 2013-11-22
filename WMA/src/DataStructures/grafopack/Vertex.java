@@ -1,5 +1,6 @@
 package DataStructures.grafopack;
 
+
 import DataStructures.linkedlistpack.List;
 
 public class Vertex <T> implements Serializable
@@ -28,11 +29,16 @@ public class Vertex <T> implements Serializable
 	 */
 	List< Vertex<T> > _ListaSalidas;
 	
-	Vertex()
+	T _Dato;
+	
+	Vertex(T pDato)
 	{
+		this._ListaEntradas = new List<Vertex<T>>();
+		this._ListaSalidas = new List<Vertex<T>>();
 		this._Serial = Vertex._VertexCant;
 		this._ID = String.format(Vertex.TYPE + "%03d", this._Serial);
 		System.out.println(this._ID);
+		this._Dato = pDato;
 		Vertex._VertexCant ++;
 	}
 	
@@ -54,6 +60,10 @@ public class Vertex <T> implements Serializable
 		return Vertex.TYPE;
 	}
 	
+	public T getDato()
+	{
+		return this._Dato;
+	}
 	public void conectInput(Vertex<T> pVertex)
 	{
 		this._ListaEntradas.add(pVertex);
@@ -77,5 +87,26 @@ public class Vertex <T> implements Serializable
 	public void disconectEdge( Edge<T> pEdge )
 	{
 		this._ListaAristas.remove(pEdge);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this._Dato.toString();
+	}
+	
+	public void print()
+	{
+		System.out.println(this._ID + " contiene el dato: " + this._Dato);
+	}
+	
+	public List<Vertex<T>> getInputs()
+	{
+		return this._ListaEntradas;
+	}
+	
+	public List<Vertex<T>> getOutputs()
+	{
+		return this._ListaSalidas;
 	}
 }

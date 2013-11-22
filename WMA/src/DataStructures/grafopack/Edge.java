@@ -36,6 +36,8 @@ public class Edge <T> implements Serializable
 		this._Salida = pSaliente;
 		this._Entrada = pEntrante;
 		//Conexion de los Nodos
+		System.out.println("\n Referenciando...");
+		
 		this._Salida.conectInput(this._Entrada);
 		this._Entrada.conectOutput(this._Salida);
 	}
