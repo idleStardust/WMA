@@ -75,18 +75,18 @@ public class Edge <T> implements Serializable
 	public void disconect()
 	{
 		//Remover Referencias
-		this._Salida.disconectInput(this._Entrada);
-		this._Entrada.disconectOutput(this._Salida);
-		
+		this._Salida.disconectOutput(this._Entrada);
+		this._Entrada.disconectInput(this._Salida);
 		// Remover Aristas
-		this._Salida.disconectEdge(this);
-		this._Entrada.disconectEdge(this);
+		//this._Salida.disconectEdge(this);
+		//this._Entrada.disconectEdge(this);
 	}
 	
 	void print()
 	{
 		System.out.println("ID: " + this._ID );
 		System.out.println("...................................................................");
+		System.out.println("Peso de la arista: " + this._Peso);
 		System.out.println("Vertice Saliente: "  + this._Salida.getID() + "\t Vertice Entrante: " + this._Entrada.getID());
 		System.out.println("Vertice Saliente: " + this._Salida.getDato() +  " \t \t Vertice Entrante: " + this._Entrada.getDato());
 		System.out.println();

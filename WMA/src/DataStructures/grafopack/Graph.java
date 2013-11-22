@@ -28,22 +28,43 @@ public class Graph <T>
 		
 		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
 		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
+		
+		//Impresion de la conexion
 		System.out.println("Nodo Saliente: " + tmpvertexsaliente.getID() + '\t' + "Nodo Entrante: " + tmpvertexentrante.getID() );
 		System.out.println("Nodo Saliente: " + tmpvertexsaliente + "\t \t" + "Nodo Entrante: " + tmpvertexentrante );
 		System.out.println("..........................................................." + "\n");
+		
+		//Asignacion de la arista.
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
+		tmpvertexentrante.conectEdge(tmpedge);
+		tmpvertexsaliente.conectEdge(tmpedge);
 	}
 	
 	public void removeVertex(String pVertex)
 	{
 		Vertex<T> removed = this.searchVertex(pVertex);
+		List<Edge<T>> removeedges = removed.getEdges();
+		if(removeedges != null)
+		{
+			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
+			while(iterator.hasNext())
+			{
+				Edge<T> tmp = iterator.next();
+				this.removeEdge( tmp );
+			}
+		}
 		this._ListVertices.remove(removed);
 	}
 	
 	public void removeEdge(String pEdge)
 	{
-		Edge<T> removed = this.searchEdge(pEdge);
-		this._ListAristas.remove(removed);
+		this.removeEdge(this.searchEdge(pEdge));
+	}
+	
+	private void removeEdge(Edge<T> pEdge)
+	{
+		pEdge.disconect();
+		this._ListAristas.remove(pEdge);
 	}
 	
 	public Edge<T> searchEdge(String pEdge)
@@ -87,16 +108,24 @@ public class Graph <T>
 		grafo.addVertex( 52 );
 		grafo.addVertex( 23 );
 		grafo.addVertex( 50 );
-		grafo.addVertex( 70 );
+		
 		grafo.addEdge("VERTEX@000", "VERTEX@001");
-		grafo.addEdge("VERTEX@002", "VERTEX@003");
-		grafo.addEdge("VERTEX@000", "VERTEX@002");
-		grafo.addEdge("VERTEX@003", "VERTEX@001");
-		grafo.searchVertex("VERTEX@000").printConexiones();
-		grafo.searchEdge("EDGE@000").print();
-		grafo.searchVertex("VERTEX@001").printConexiones();
-		grafo.searchVertex("VERTEX@002").printConexiones();
-		grafo.searchVertex("VERTEX@003").printConexiones();
-		grafo.searchVertex("VERTEX@002").print();
+		grafo.addEdge("VERTEX@002", "VERTEX@001");
+		grafo.addEdge("VERTEX@001", "VERTEX@002");
+		grafo.addEdge("VERTEX@002", "VERTEX@000");
+		grafo.printVertex();
+		
+		System.out.print("After....." + "\n");
+		grafo.removeVertex("VERTEX@002");
+		grafo.printVertex();
+	}
+	
+	public void printVertex()
+	{
+		LinkedListIterator< Vertex<T> > iterator = this._ListVertices.iterator();
+		while(iterator.hasNext())
+		{
+			iterator.next().printConexiones();
+		}
 	}
 }
