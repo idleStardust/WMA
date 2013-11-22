@@ -45,4 +45,24 @@ public class Vertex <T> implements Serializable
 	{
 		return Vertex.TYPE;
 	}
+	
+	void conectInput(Vertex<T> pVertex)
+	{
+		this._ListaEntradas.add(pVertex);
+	}
+	
+	void conectOutput(Vertex<T> pVertex)
+	{
+		this._ListaSalidas.add(pVertex);
+	}
+	
+	void disconectInput( Vertex<T> pVertex )
+	{
+		this._ListaEntradas.remove( pVertex );
+	}
+	
+	void disconectOutput( Vertex<T> pVertex )
+	{
+		this._ListaSalidas.remove( pVertex );
+	}
 }

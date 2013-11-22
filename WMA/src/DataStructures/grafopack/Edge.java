@@ -1,7 +1,5 @@
 package DataStructures.grafopack;
 
-import DataStructures.linkedlistpack.List;
-
 public class Edge <T> implements Serializable
 {
 	// Tipo de Objeto 
@@ -18,10 +16,26 @@ public class Edge <T> implements Serializable
 	Vertex<T> _Entrada;
 	int _Peso;
 	
-	Edge()
+	public Edge()
 	{
-		this._Peso = (int) (Math.random() * 500);
+		this( (int) (Math.random() * 500) );
 	}
+	
+	public Edge(int pPeso)
+	{
+		this._Peso = pPeso;
+	}
+	
+	public void conect( Vertex<T> pSaliente, Vertex<T> pEntrante )
+	{
+		//Referencias del Arista
+		this._Salida = pSaliente;
+		this._Entrada = pEntrante;
+		//Conexion de los Nodos
+		this._Salida.conectInput(this._Entrada);
+		this._Entrada.conectOutput(this._Salida);
+	}
+	
 	@Override
 	public String getID()
 	{
@@ -40,17 +54,17 @@ public class Edge <T> implements Serializable
 		return Vertex.TYPE;
 	}
 	
-	Vertex<T> getSalida()
+	public Vertex<T> getOutput()
 	{
 		return this._Salida;
 	}
 	
-	Vertex<T> getEntrada()
+	public Vertex<T> getInput()
 	{
 		return this._Entrada;
 	}
 	
-	int getPeso()
+	public int getWeigth()
 	{
 		return this._Peso;
 	}
