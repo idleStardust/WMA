@@ -1,22 +1,16 @@
 package DataStructures.grafopack;
 
-public class Edge <T extends Comparable<T> > implements Serializable
-{
-	// Tipo de Objeto 
-	final static String TYPE = "EDGE@";
-
-	// Cantidad de Vertices
-	static int _CantEdge = 0;
-	
+public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
+{	
 	// Identificador del Objeto
-	int _Serial;
-	String _ID;
+	String _ID = "EdgeDefault";
 	
+	//Referencias a otros objetos
 	Vertex<T> _Salida;
 	Vertex<T> _Entrada;
 	int _Peso;
 	
-	public Edge()
+	public Edge( )
 	{
 		this( (int) (Math.random() * 500) );
 	}
@@ -24,9 +18,6 @@ public class Edge <T extends Comparable<T> > implements Serializable
 	public Edge(int pPeso)
 	{
 		this._Peso = pPeso;
-		this._Serial = Edge._CantEdge;
-		this._ID = String.format(Edge.TYPE + "%03d", this._Serial);
-		Edge._CantEdge ++;
 	}
 	
 	public void conect( Vertex<T> pSaliente, Vertex<T> pEntrante )
@@ -39,22 +30,9 @@ public class Edge <T extends Comparable<T> > implements Serializable
 		this._Entrada.conectInput(this._Salida);
 	}
 	
-	@Override
 	public String getID()
 	{
 		return this._ID;
-	}
-
-	@Override
-	public int getSerial()
-	{
-		return this._Serial;
-	}
-
-	@Override
-	public String getType()
-	{
-		return Edge.TYPE;
 	}
 	
 	public Vertex<T> getOutput()
@@ -90,5 +68,17 @@ public class Edge <T extends Comparable<T> > implements Serializable
 		System.out.println("Vertice Saliente: "  + this._Salida.getID() + "\t Vertice Entrante: " + this._Entrada.getID());
 		System.out.println("Vertice Saliente: " + this._Salida.getDato() +  " \t \t Vertice Entrante: " + this._Entrada.getDato());
 		System.out.println();
+	}
+
+
+	@Override
+	public int compareTo(Edge<T> o)
+	{
+		int index = -1;
+		if(this._Peso == o.getWeigth())
+			index = 0;
+		else if(this._Peso > o.getWeigth())
+			index = 1;
+		return index;
 	}
 }

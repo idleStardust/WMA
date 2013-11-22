@@ -10,7 +10,8 @@ public class Graph <T extends Comparable<T> >
 	List< Edge <T> > _ListAristas;
 	
 	/**
-	 * 
+	 * Construye una estructura de datos de tipo 
+	 * <b>grafo</b> que contendra una coleccion de nodos y aristas
 	 */
 	public Graph()
 	{
@@ -20,7 +21,7 @@ public class Graph <T extends Comparable<T> >
 	}
 	
 	/**
-	 * Añade a la estructura un nuevo dato, sin ninguna conexión.
+	 * Añade a la estructura un nuevo dato, sin ninguna conexión establecida.
 	 * @param pDato T
 	 * @param pEtiqueta {@link String}
 	 * @see Vertex
@@ -38,7 +39,7 @@ public class Graph <T extends Comparable<T> >
 	 * @param pVerticeEntrante {@link String}
 	 * @throws ItemNotFoundException
 	 */
-	public void conect(String pVerticeSaliente, String pVerticeEntrante)
+	public void conect( String pVerticeSaliente, String pVerticeEntrante )
 	{
 		/*------------------------------Preparacion por la adicion--------------------------*/
 		Edge<T> tmpedge = new Edge<T>();
@@ -60,7 +61,7 @@ public class Graph <T extends Comparable<T> >
 		this._ListAristas.add( tmpedge );
 	}
 	
-	public void conect(T pVerticeSaliente, T pVerticeEntrante)
+	public void conect( T pVerticeSaliente, T pVerticeEntrante )
 	{
 		/*------------------------------Preparacion por la adicion--------------------------*/
 		Edge<T> tmpedge = new Edge<T>();
@@ -119,11 +120,38 @@ public class Graph <T extends Comparable<T> >
 		this._ListVertices.remove(removed);
 	}
 	
+	
+	/**
+	 * Elimina por medio de un dato un vertice del grafo.
+	 * @param pDato {@link String}
+	 * @throws ItemNotFoundException
+	 */
+	public void remove(T pDato)
+	{
+		//	Busqueda del vertice removido
+		Vertex<T> removed = this.searchVertex(pDato);
+		List<Edge<T>> removeedges = removed.getEdges();
+		if(removeedges != null)
+		{
+			/*-------------------------------Preparacion de Iteradores---------------------*/
+			//	Tipo: Vertex<T>
+			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
+			while(iterator.hasNext())
+			{
+				Edge<T> tmp = iterator.next();
+				this.removeEdge( tmp );
+			}
+		}
+		//	Removicion de la base de datos interna
+		this._ListVertices.remove(removed);
+	}
+	
 	/**
 	 * Elimina una arista por medio de una etiqueta dada.
 	 * @param pEdge {@link String}
 	 * @throws ItemNotFoundException
 	 * @version 1.3 (Vie 2:41 AM)
+	 * @deprecated
 	 */
 	public void disconnect(String pEdge)
 	{
@@ -258,6 +286,7 @@ public class Graph <T extends Comparable<T> >
 		grafe.conect(52, 23);
 		grafe.conect(50, 23);
 		grafe.conect(23, 50);
+		grafe.remove(52);
 		grafe.printVertex();
 	}
 	

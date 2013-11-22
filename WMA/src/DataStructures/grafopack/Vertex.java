@@ -108,7 +108,8 @@ public class Vertex <T extends Comparable<T> > implements Comparable<T>
 
 	public void printConexiones()
 	{	
-		System.out.println("\t" + this._ID);
+		System.out.println("____________________________________________");
+		System.out.println("ID: " + this._ID + '\t' + " Dato: " + this._Dato.toString());
 		System.out.println("............................................");
 		System.out.print("Lista Conexiones Entrantes: ");
 		this._ListaEntradas.print();
