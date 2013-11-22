@@ -1,7 +1,5 @@
 package DataStructures.linkedlistpack;
 
-import java.util.Iterator;
-
 public class List < T >
 {
 	final static int NOTFOUND = -1;
