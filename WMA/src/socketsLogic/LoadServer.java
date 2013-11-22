@@ -17,7 +17,6 @@ public class LoadServer {
 	        Socket socket = null;
 	        TrafficLogic data = new TrafficLogic();
 	        try {
-	           
 	        	server = new ServerSocket(port, maxGamers);
 	            
 	            while (true) {
@@ -27,7 +26,6 @@ public class LoadServer {
 	                
 	                ClientConection gc = new ClientConection(socket, data);
 	                gc.start();
-	                
 	            }
 	        } catch (IOException ex) {
 	            System.out.println("Error: " + ex.getMessage());
@@ -37,6 +35,9 @@ public class LoadServer {
 	                server.close();
 	            } catch (IOException ex) {
 	            	System.out.println("Error stopping server: " + ex.getMessage());
+	            }
+	            catch(NullPointerException e){
+	            	System.out.println("Error al crear servidor proceso en memoria: ");
 	            }
 	        }
 	    }

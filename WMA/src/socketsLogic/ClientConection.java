@@ -37,8 +37,8 @@ public class ClientConection extends Thread implements Observer {
 			try {
 
 				dataReceived = inputData.readUTF();
-
 				data.setData(dataReceived);
+				
 			} catch (IOException ex) {
 				System.out.println("Client "
 						+ socket.getInetAddress().getHostName()
