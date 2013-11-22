@@ -4,7 +4,14 @@ import DataStructures.grafopack.*;
 public class Manager {
 	private String _ip;
 	
-	private Graph<Region> _dominio;
+	private Graph<Dominio> _supergrafo;
+	
+	private Dominio _dominio;
+	
+	public Manager(){
+		_supergrafo = new Graph<Dominio>();
+		_dominio = new Dominio("192.168.1.1");
+	}
 	
 	public void llamarCazador(String pId){
 		
@@ -13,52 +20,47 @@ public class Manager {
 	public void misionCazador(String pId){
 		
 	}
-	
 	public void visitar(String pId,String pHunter){
 		
 	}
 	
-	public String crearRegion(){
+	public String crearRegionLocal(){
 		NormalRegion region = new NormalRegion(_ip, null);
 		
-		_dominio.add(region,region.getID());
+		_dominio.getGraph().add(region,region.getID());
 		return region.getID();
 	}
 	
-	public String crearRegion(Arduino pArduino){
+	public String crearRegionLocal(Arduino pArduino){
 		NormalRegion region = new NormalRegion(_ip, pArduino);
-		_dominio.add(region,region.getID());
+		_dominio.getGraph().add(region,region.getID());
 		return region.getID();
 	}
 	
-	public String crearRegion(String pIp){
-		NormalRegion region = new NormalRegion(pIp, null);
-		_dominio.add(region,region.getID());
-		return region.getID();
-	}
-	
-	public String crearRegion(String pIp,Arduino pArduino){
-		NormalRegion region = new NormalRegion(pIp, pArduino);
-		_dominio.add(region,region.getID());
+	public String crearRegionExtrangera(String pID, String pIp,Arduino pArduino){
+		NormalRegion region = new NormalRegion(pID, pIp, pArduino);
+		Dominio dom = _supergrafo.search(pIp);
+ 		dom.getGraph().add(region,region.getID());
 		return region.getID();
 	}
 	
 	public void crearArduino(int pPuntos, String pId){
-		Region region = _dominio.search(pId).getDato();
+		Region region = _dominio.getGraph().search(pId);
 		if ("node".equals(region.getTipo())){
 			Arduino arduino = new Arduino(pPuntos);
 			((NormalRegion)region).AssingArduino(arduino);
 		}
 	}
-	
 	public void crearHunter(String pId,String pIdNode){
-		
 		Cazador cazador = new Cazador();
-		Region region = _dominio.search(pId).getDato();
+		Region region = _dominio.getGraph().search(pId);
 		//cazador.setHomeRegion(region.);
 		if ("node".equals("")){
 			
 		}	
+	}
+	public void print(){
+		_dominio.getGraph().printVertex();
 	}
 	
 	public void crearHunter(String pId,String pRegion,String pDominio){

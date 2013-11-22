@@ -28,6 +28,7 @@ public class ClientLogic extends JFrame{
     
     
     
+    
     public ClientLogic(String pHost, int pPort, String pGamer){
         super("Chat de prueba");
     	this.host = pHost;
