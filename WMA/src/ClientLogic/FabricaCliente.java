@@ -33,11 +33,8 @@ public class FabricaCliente extends JFrame{
 
         Container c = this.getContentPane();
         c.setLayout(new GridBagLayout());
-        
         c.add(tfData);
-       
         c.add(btSend);
-       
         this.setBounds(400, 100, 400, 100);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     

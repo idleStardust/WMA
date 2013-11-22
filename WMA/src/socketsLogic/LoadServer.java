@@ -6,6 +6,10 @@ import java.net.Socket;
 
 
 public class LoadServer {
+	
+	public static void main(String[] args) {
+		LoadServer prueba = new LoadServer();
+	}
 	 public LoadServer(){
 		 int port = 1238; 
 	        int maxGamers = 1000; 
