@@ -25,7 +25,7 @@ public class ClientLogic extends JFrame{
     private String host;
     private String gamerID;
     boolean connected = true;
-    
+    Decoder decoding=Decoder.getInstance();
     
     
     
@@ -56,7 +56,7 @@ public class ClientLogic extends JFrame{
         }
         
         btSend.addActionListener(new ServerConnectionLogic(socket, tfData, gamerID));
-        
+        System.out.println("");
     }
     
     void desconectarCliente(){
@@ -81,12 +81,18 @@ public class ClientLogic extends JFrame{
         	String msg=inputData.readUTF();
         	msg=msg.replaceFirst("cliente: ", "");
         	System.out.println("mensaje recibido"+msg);
-        	//decoding.Decode(msg);
+        	decoding.Decode(msg);
         	//System.out.println(inputData.readUTF());
             
         	
             
         }
+    }
+    
+    public void sendmsg(String msg){
+    	System.out.println("metodo sen msg");
+    	ServerConnectionLogic a=new ServerConnectionLogic(socket, msg, gamerID);
+    	a.sendMSG();
     }
 
 }

@@ -17,9 +17,24 @@ public class ServerConnectionLogic implements ActionListener{
     private DataOutputStream outputData;
     private JTextField data;
     private Decoder decoding = new Decoder().getInstance();
+    String dataprueba;
+    
     public ServerConnectionLogic(Socket pSocket, JTextField pData, String pGamer) {
     	this.socket = pSocket;
         this.data = pData;
+        this.gamer = pGamer;
+        try {
+            this.outputData = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException ex) {
+            System.out.println("Error creating output stream : " + ex.getMessage());
+        } catch (NullPointerException ex) {
+        	System.out.println("El socket was not started correctly");
+        }
+	}
+    
+    public ServerConnectionLogic(Socket pSocket, String pData, String pGamer) {
+    	this.socket = pSocket;
+        this.dataprueba = pData;
         this.gamer = pGamer;
         try {
             this.outputData = new DataOutputStream(socket.getOutputStream());
@@ -37,6 +52,19 @@ public class ServerConnectionLogic implements ActionListener{
             System.out.println("verificando entrada"+data.getText());
         	decoding.Decode(data.getText());
             data.setText("");
+            
+        } catch (IOException ex) {
+        	System.out.println("Error sending data: " + ex.getMessage());
+        }
+    }
+    
+    public void sendMSG() {
+    	
+        try {
+            outputData.writeUTF(gamer + ": " + dataprueba );
+            System.out.println("verificando entrada"+dataprueba);
+        	decoding.Decode(dataprueba);
+        	dataprueba="";
             
         } catch (IOException ex) {
         	System.out.println("Error sending data: " + ex.getMessage());
