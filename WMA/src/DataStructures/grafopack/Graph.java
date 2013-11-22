@@ -1,5 +1,6 @@
 package DataStructures.grafopack;
 
+import DataStructures.exceptions.ItemNotFoundException;
 import DataStructures.linkedlistpack.LinkedListIterator;
 import DataStructures.linkedlistpack.List;
 
@@ -8,44 +9,83 @@ public class Graph <T extends Comparable<T> >
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
 	
+	/**
+	 * 
+	 */
 	public Graph()
 	{
+		//---------------Inicializacion de listas bases de datos----------------------\\
 		this._ListVertices = new List<Vertex<T>>() ;
 		this._ListAristas = new List<Edge<T>>() ;
 	}
 	
-	public void addVertex( T pDato, String pEtiqueta )
+	/**
+	 * Añade a la estructura un nuevo dato, sin ninguna conexión.
+	 * @param pDato T
+	 * @param pEtiqueta {@link String}
+	 * @see Vertex
+	 * @caution El metodo posiblememente necesitara una etiqueta para la arista.
+	 */
+	public void add( T pDato, String pEtiqueta )
 	{
 		this._ListVertices.add( new Vertex<T>(pDato, pEtiqueta) );
 	}
 	
-	public void addEdge(String pVerticeSaliente, String pVerticeEntrante)
+	/**
+	 * Conecta a dos vertices del grafo a través de dos etiquetas correspondientes
+	 * a los vértices.
+	 * @param pVerticeSaliente {@link String}
+	 * @param pVerticeEntrante {@link String}
+	 * @throws ItemNotFoundException
+	 */
+	public void conect(String pVerticeSaliente, String pVerticeEntrante)
 	{
+		/*------------------------------Preparacion por la adicion--------------------------*/
 		Edge<T> tmpedge = new Edge<T>();
-		this._ListAristas.add( tmpedge );
 		
-		System.out.println("-----------------------Conectando Nodos-------------------");
 		
-		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
-		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
+		//	Busqueda de los vertices correspondientes
+		Vertex<T> tmpvertexsaliente = this.searchVertexID(pVerticeSaliente);
+		Vertex<T> tmpvertexentrante = this.searchVertexID(pVerticeEntrante);
 		
-		//Impresion de la conexion
-		System.out.println("Nodo Saliente: " + tmpvertexsaliente.getID() + '\t' + "Nodo Entrante: " + tmpvertexentrante.getID() );
-		System.out.println("Nodo Saliente: " + tmpvertexsaliente + "\t \t" + "Nodo Entrante: " + tmpvertexentrante );
-		System.out.println("..........................................................." + "\n");
+		//	Impresion de la conexion
+		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		
-		//Asignacion de la arista.
+		/*----------------------------Asignacion de Referencias-------------------------------*/
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
 		tmpvertexentrante.conectEdge(tmpedge);
 		tmpvertexsaliente.conectEdge(tmpedge);
+		
+		//	Adición a la base de datos interna.
+		this._ListAristas.add( tmpedge );
 	}
 	
-	public void removeVertex(String pVertex)
+	/**
+	 * 
+	 * @param pNodoSaliente {@link Vertex}
+	 * @param pNodoEntrante {@link Vertex}
+	 */
+	protected void printEdgeConection(Vertex<T> pNodoSaliente, Vertex<T> pNodoEntrante)
 	{
-		Vertex<T> removed = this.searchVertex(pVertex);
+		System.out.println("-----------------------Conectando Nodos-------------------");
+		System.out.println("Nodo Saliente: " + pNodoSaliente.getID() + '\t'  +  "Nodo Entrante: " + pNodoEntrante.getID() );
+		System.out.println("Nodo Saliente: " + pNodoSaliente + 		   '\t'  +  "Nodo Entrante: " + pNodoEntrante );
+		System.out.println("...........................................................");
+	}
+	
+	/**
+	 * 
+	 * @param pEtiqueta {@link String}
+	 */
+	public void remove(String pEtiqueta)
+	{
+		//	Busqueda del vertice removido
+		Vertex<T> removed = this.searchVertexID(pEtiqueta);
 		List<Edge<T>> removeedges = removed.getEdges();
 		if(removeedges != null)
 		{
+			/*-------------------------------Preparacion de Iteradores---------------------*/
+			//	Tipo: Vertex<T>
 			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
 			while(iterator.hasNext())
 			{
@@ -53,93 +93,175 @@ public class Graph <T extends Comparable<T> >
 				this.removeEdge( tmp );
 			}
 		}
+		//	Removicion de la base de datos interna
 		this._ListVertices.remove(removed);
 	}
 	
-	public void removeEdge(String pEdge)
+	/**
+	 * IN develop
+	 * @param pDato
+	 */
+	public void remove(T pDato)
 	{
-		this.removeEdge(this.searchEdge(pEdge));
+		//	Busqueda del vertice removido
+		Vertex<T> removed = this.searchVertex(pDato);
+		List<Edge<T>> removeedges = removed.getEdges();
+		if(removeedges != null)
+		{
+			/*-------------------------------Preparacion de Iteradores---------------------*/
+			//	Tipo: Vertex<T>
+			LinkedListIterator< Edge<T> > iterator = removed.getEdges().iterator();
+			while(iterator.hasNext())
+			{
+				Edge<T> tmp = iterator.next();
+				this.removeEdge( tmp );
+			}
+		}
+		//	Removicion de la base de datos interna
+		else
+			throw new ItemNotFoundException(pDato.toString());
+		this._ListVertices.remove(removed);
 	}
 	
+	/**
+	 * Elimina una arista por medio de una etiqueta dada.
+	 * @param pEdge {@link String}
+	 * @throws ItemNotFoundException
+	 * @version 1.3 (Vie 2:41 AM)
+	 */
+	public void disconnect(String pEdge)
+	{
+		//Busqueda y eliminacion de una arista.
+		this.removeEdge(this.searchEdgeID(pEdge));
+	}
+	
+	/**
+	 * Elimina una arista del grafo y desconecta la referencias 
+	 * entre vertices.
+	 * @param pEdge {@link Edge}
+	 * @version 1.2 (Vie 2.41 AM)
+	 */
 	private void removeEdge(Edge<T> pEdge)
 	{
+		//	Desconexion de la Arista de los Vertices
 		pEdge.disconect();
+		//	Removicion de la Arista del Grafo
 		this._ListAristas.remove(pEdge);
 	}
 	
-	public Edge<T> searchEdge(String pEdge)
+	/**
+	 * Busca y retorna una arista con la etiqueta igual a la brindada.
+	 * @param pEtiqueta {@link String}
+	 * @return Edge T
+	 * @version 1.2 (Vie 1:36 AM)
+	 * @throws ItemNotFoundException
+	 */
+	private Edge<T> searchEdgeID(String pEtiqueta)
 	{
+		/*-------------------------------Preparacion de Iteradores---------------------*/
+		//	Tipo: Edge<T>
 		LinkedListIterator<Edge<T>> iterator = this._ListAristas.iterator();
-		
 		Edge<T> result = null;
 		Edge<T> tmp;
+		
+		//=====================================Busqueda===================================/
 		while(iterator.hasNext())
 		{
 			tmp = iterator.next();
-			if(tmp.getID().equalsIgnoreCase(pEdge))
+			if(tmp.getID().equalsIgnoreCase(pEtiqueta))
 			{
 				result = tmp;
 				break;
 			}
 		}
+		// Dato no encontrado ====> Excepcion: ItemNotFoundException
+		if(result == null)
+			throw new ItemNotFoundException(pEtiqueta);
 		return result;
 	}
 	
-	public Vertex <T> searchVertex(String pVertex)
+	/**
+	 * Busca y retorna un vertice que contenda la misma etiqueta que
+	 * la etiqueta brindada.
+	 * @param pEtiqueta {@link String}
+	 * @throws ItemNotFoundException
+	 * @version 1.1 (Vie 1:24 AM)
+	 * @return Vertex T
+	 */
+	private Vertex <T> searchVertexID(String pEtiqueta)
 	{
+		/*-------------------------------Preparacion de Iteradores---------------------*/
+		//	Tipo: Vertex<T>
 		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
 		Vertex <T> tmp;
+		
+		//=====================================Busqueda===================================/
 		while(iterator.hasNext())
 		{
 			tmp = iterator.next();
-			if(tmp.getID().equalsIgnoreCase(pVertex))
+			if(tmp.getID().equalsIgnoreCase(pEtiqueta))
 			{
 				result = tmp;
 				break;
 			}
 		}
+		// Dato no encontrado ====> Excepcion: ItemNotFoundException
+		if(result == null)
+			throw new ItemNotFoundException(pEtiqueta);
 		return result;
 	}
 	
-	public Vertex <T> searchVertex(T pDato)
+	/**
+	 * Busca y retorna un vertice que contenga un dato indicado.
+	 * @param pDato
+	 * @return Vertex T
+	 * @version 1.1 (Vie 1:32 AM)
+	 * @throws ItemNotFoundException
+	 */
+	private Vertex <T> searchVertex(T pDato)
 	{
-		this._ListVertices.print();
+		/*----------------------------Preparacion de Iteradores---------------------------*/
 		LinkedListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
 		Vertex <T> tmp;
-		int tmp2;
+		//=====================================Busqueda===================================/
 		while(iterator.hasNext())
 		{
 			tmp = iterator.next();
-			tmp2 = tmp.compareTo(pDato);
-			if( tmp2 == 0)
+			if( tmp.compareTo(pDato) == 0)
 			{
 				result = tmp;
 				break;
 			}
 		}
+		// Dato no encontrado ====> Excepcion: ItemNotFoundException
+		if(result==null)
+			throw new ItemNotFoundException(pDato.toString());
 		return result;
 	}
 	
 	public static void main(String[] args)
 	{
 		Graph<Integer> grafo = new Graph<Integer>();
-		grafo.addVertex( 52, "Nodin" );
-		grafo.addVertex( 23, "Nodae" );
-		grafo.addVertex( 50, "Nodaa" );
+		grafo.add( 52, "Nodin" );
+		grafo.add( 23, "Nodae" );
+		grafo.add( 50, "Nodaa" );
 		
-		grafo.addEdge("VERTEX@000", "VERTEX@001");
-		grafo.addEdge("VERTEX@002", "VERTEX@001");
-		grafo.addEdge("VERTEX@001", "VERTEX@002");
-		grafo.addEdge("VERTEX@002", "VERTEX@000");
+		grafo.conect("Nodin", "Nodae");
+		grafo.conect("Nodaa", "Nodae");
+		grafo.conect("Nodae", "Nodaa");
+		grafo.conect("Nodaa", "Nodin");
 		grafo.printVertex();
 		System.out.print("After....." + "\n");
 		System.out.println("Nodo Buscado " + grafo.searchVertex(23).getID() +" Finish");
 		grafo.printVertex();
 	}
 	
-	public void printVertex()
+	/**
+	 * Imprime las conexiones que cada vertices presenta. Sus listas de entradas y de salidas.
+	 */
+	protected void printVertex()
 	{
 		LinkedListIterator< Vertex<T> > iterator = this._ListVertices.iterator();
 		while(iterator.hasNext())
