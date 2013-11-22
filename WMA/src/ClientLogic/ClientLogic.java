@@ -12,16 +12,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import networkpack.protocolpack.Decoder;
+import networkpack.protocolpack.Encoder;
 
 
-public class FabricaCliente extends JFrame{
+
+public class ClientLogic extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Socket socket;
     private int port;
     private String host;
     private String gamerID;
+    boolean connected = true;
+    Decoder decoding = new Decoder().getInstance();
     
-    public FabricaCliente(String pHost, int pPort, String pGamer){
+    
+    public ClientLogic(String pHost, int pPort, String pGamer){
         super("Chat de prueba");
     	this.host = pHost;
     	this.port = pPort;
@@ -51,6 +57,10 @@ public class FabricaCliente extends JFrame{
         
     }
     
+    void desconectarCliente(){
+    	connected=false;
+    }
+    
     public void getServerData() throws IOException{
        
         DataInputStream inputData = null;
@@ -63,10 +73,10 @@ public class FabricaCliente extends JFrame{
             System.out.println("Error creating Socket.");
         }
         
-        boolean connected = true;
+        
         while (connected) {
-           
         	System.out.println(inputData.readUTF());
+        	decoding.Decode(inputData.readUTF());
             
         }
     }

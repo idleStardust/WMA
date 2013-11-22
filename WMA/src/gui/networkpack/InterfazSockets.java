@@ -27,6 +27,7 @@ public class InterfazSockets extends JFrame{
 	JScrollPane _scroll;
 	JDialog _error;
 	boolean _isServer = false;
+	
 	public InterfazSockets(){
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

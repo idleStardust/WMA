@@ -2,7 +2,7 @@ package networkpack.protocolpack;
 
 public class Encoder {
 	private static Encoder _singletonEncoder = new Encoder();
-	private Encoder(){}
+	public Encoder(){}
 	public String _from;
 	public String _to;
 	public static Encoder getInstance(){

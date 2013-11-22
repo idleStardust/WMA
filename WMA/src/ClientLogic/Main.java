@@ -1,9 +1,9 @@
 package ClientLogic;
 
 import java.io.IOException;
-public class Main {
+public class Main implements ConstantsServer{
 	 public static void main(String[] args) throws IOException {
-	        FabricaCliente f = new FabricaCliente("172.18.117.147", 1238, "Gamer1");
+	        ClientLogic f = new ClientLogic(ip, 1238, "Gamer1"); 
 	        f.getServerData();
 	    }
 }

@@ -12,7 +12,7 @@ public class LoadServer {
 	}
 	 public LoadServer(){
 		 int port = 1238; 
-	        int maxGamers = 1000; 
+	        int maxGamers = 1000;
 	        ServerSocket server = null; 
 	        Socket socket = null;
 	        TrafficLogic data = new TrafficLogic();
@@ -21,7 +21,7 @@ public class LoadServer {
 	        	server = new ServerSocket(port, maxGamers);
 	            
 	            while (true) {
-	                System.out.println("waiting for new gamers.");
+	                System.out.println("waiting for new clients");
 	                socket = server.accept();
 	                System.out.println("IP Gamer " + socket.getInetAddress().getHostName() + " connected.");
 	                
@@ -40,6 +40,8 @@ public class LoadServer {
 	            }
 	        }
 	    }
+	 
+	 DesconectarCliente()
      	
      }
 

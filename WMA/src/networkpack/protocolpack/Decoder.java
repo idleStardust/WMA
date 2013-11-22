@@ -2,11 +2,10 @@ package networkpack.protocolpack;
 
 public class Decoder {
 	private static Decoder _singletonDecoder = new Decoder();
-	private Decoder(){}
-	
+	public Decoder(){}
 	
 	public static void main(String[] args) {
-		_singletonDecoder.Decode("<correspondence%id=lun 11 de nov 12:53%from=192.168.0.2%to=all%type=node%action=create%contains=ardunio@1%details=ID:node@533#domain:192.168.0.2/>");
+		//_singletonDecoder.Decode("<correspondence%id=lun 11 de nov 12:53%from=192.168.0.2%to=all%type=node%action=create%contains=ardunio@1%details=ID:node@533#domain:192.168.0.2/>");
 	}
 	public static Decoder getInstance(){
 		return _singletonDecoder;
