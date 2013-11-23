@@ -47,10 +47,7 @@ public class Manager {
 	 *
 	 * @param pId el Id del cazador.
 	 */
-	public void misionCazador(String pId){
-		
-	}
-	
+	public void misionCazador(String pId){}
 	/**
 	 * Visitar. Visita un nodo.
 	 *
@@ -64,6 +61,7 @@ public class Manager {
 		//Agregar Un Dijkstra.
 		pHunter.start();
 	}
+	
 	/**
 	 * Crear region local. Crea un nodo el el grafo dominio, que pertenece a la computadora.
 	 *
@@ -278,9 +276,11 @@ public class Manager {
 	}
 	
 	
+	
 	/**
 	 * Imprime el dominio.
 	 */
+	
 	public void print(){
 		_dominio.getGraph().printVertex();
 	}
