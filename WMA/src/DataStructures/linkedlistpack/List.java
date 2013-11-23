@@ -86,14 +86,25 @@ public class List < T > implements Iterable<T>
 	{
 		ListIterator<T> iterator = 
 				this.iterator();
-		System.out.print("[\t");
+		System.out.print("[ ");
 		while(iterator.hasNext())
 		{
-			System.out.print(iterator.next() + ",\t");
+			System.out.print(iterator.next().toString() + ", ");
 		}
-		System.out.println("\t]");
+		System.out.println(" ]");
 	}
 	
+	public String toString()
+	{
+		ListIterator<T> iterator = this.iterator();
+		String result = "[ ";
+		while(iterator.hasNext())
+		{
+			result += iterator.next().toString() + ", ";
+		}
+		result += " ]";
+		return result;
+	}
 	/**
 	 * 
 	 * @param pIndice
