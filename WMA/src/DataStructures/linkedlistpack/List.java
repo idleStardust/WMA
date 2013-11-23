@@ -4,7 +4,6 @@ import DataStructures.exceptions.ItemNotFoundException;
 
 public class List < T > implements Iterable<T>
 {
-	final static int NOTFOUND = -1;
 	private ListNode< T > _Head;
 	private ListNode< T > _Tail;
 	private int _Size;
@@ -98,7 +97,9 @@ public class List < T > implements Iterable<T>
 		ListIterator<T> iterator = this.iterator();
 		String result = "[ ";
 		while(iterator.hasNext())
+		{
 			result += "\t" + iterator.next().toString() + ", ";
+		}
 		result += "\t]";
 		return result;
 	}
@@ -178,18 +179,15 @@ public class List < T > implements Iterable<T>
 	
 	public int search(T pDato)
 	{
-		int index = List.NOTFOUND;
 		ListIterator<T> iterador = this.iterator();
 		for(int x = 0; iterador.hasNext(); x++)
 		{
 			if( iterador.next().equals(pDato) )
 			{
-				index = x;
-			 	break;
+				return x;
 			}
 		}
-		if(index == List.NOTFOUND) throw new ItemNotFoundException(pDato.toString());
-		return index;
+		throw new ItemNotFoundException(pDato.toString());
 	}
 	
 	protected ListNode<T> getHead()

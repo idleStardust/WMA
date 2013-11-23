@@ -3,7 +3,9 @@ package DataStructures.grafopack;
 public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 {	
 	// Identificador del Objeto
-	String _ID = "EdgeDefault";
+	String _ID;
+	String _Type;
+	static int Serial = 0;
 	
 	//Referencias a otros objetos
 	Vertex<T> _Salida;
@@ -18,6 +20,8 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 	public Edge(int pPeso)
 	{
 		this._Peso = pPeso;
+		this._ID = "Edge@" + Edge.Serial;
+		Edge.Serial++;
 	}
 	
 	public void conect( Vertex<T> pSaliente, Vertex<T> pEntrante )
@@ -26,8 +30,7 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 		this._Salida = pSaliente;
 		this._Entrada = pEntrante;
 		//Conexion de los Nodos
-		this._Salida.conectOutput(this._Entrada);
-		this._Entrada.conectInput(this._Salida);
+		
 		this._Salida.conectEdge(this);
 		this._Entrada.conectEdge(this);
 	}
@@ -83,6 +86,11 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 			index = 1;
 		return index;
 	}
+	
+	public void set(int pPeso, Vertex<T> pVertice)
+	{
+		this._Salida
+	}	
 	
 	public String toString()
 	{

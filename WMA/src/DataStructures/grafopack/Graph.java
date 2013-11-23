@@ -22,7 +22,7 @@ public class Graph <T extends Comparable<T> >
 		this._ListAristas = new List<Edge<T>>() ;
 		this._Matrix = new Matrix<Edge<T>>();
 	}
-	
+
 	/**
 	 * Añade a la estructura un nuevo dato, sin ninguna conexión establecida.
 	 * @param pDato T
@@ -33,9 +33,9 @@ public class Graph <T extends Comparable<T> >
 	public void add( T pDato, String pEtiqueta )
 	{
 		this._ListVertices.add( new Vertex<T>(pDato, pEtiqueta) );
-		this._Matrix.addQuark(new Edge<T>(1000));
+		this._Matrix.addQuark(new Edge<T>(1000), new Edge<T>(0));
 	}
-	
+
 	/**
 	 * Conecta a dos vertices del grafo a través de dos etiquetas correspondientes
 	 * a los vértices.
@@ -47,18 +47,18 @@ public class Graph <T extends Comparable<T> >
 	{
 		/*------------------------------Preparacion por la adicion--------------------------*/
 		Edge<T> tmpedge = new Edge<T>();
-		
-		
+
+
 		//	Busqueda de los vertices correspondientes
 		Vertex<T> tmpvertexsaliente = this.searchVertexID(pVerticeSaliente);
 		Vertex<T> tmpvertexentrante = this.searchVertexID(pVerticeEntrante);
 		this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		//	Impresion de la conexion
 		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
-		
+
 		/*----------------------------Asignacion de Referencias-------------------------------*/
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
-		
+
 		//	Adición a la base de datos interna.
 		this._Matrix.set(tmpedge, 
 				this._ListVertices.search(tmpvertexsaliente), 
@@ -70,18 +70,18 @@ public class Graph <T extends Comparable<T> >
 	{
 		/*------------------------------Preparacion por la adicion--------------------------*/
 		Edge<T> tmpedge = new Edge<T>();
-		
-		
+
+
 		//	Busqueda de los vertices correspondientes
 		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
 		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
 		this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		//	Impresion de la conexion
 		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
-		
+
 		/*----------------------------Asignacion de Referencias-------------------------------*/
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
-		
+
 		//	Adición a la base de datos interna.
 		this._Matrix.set(tmpedge, 
 				this._ListVertices.search(tmpvertexsaliente), 
@@ -100,7 +100,7 @@ public class Graph <T extends Comparable<T> >
 		System.out.println("Nodo Saliente: " + pNodoSaliente + 		   '\t'  +  "Nodo Entrante: " + pNodoEntrante );
 		System.out.println("...........................................................");
 	}
-	
+
 	/**
 	 * Elimina por medio de una etiqueta un vertice del grafo.
 	 * @param pEtiqueta {@link String}
@@ -126,8 +126,8 @@ public class Graph <T extends Comparable<T> >
 		this._Matrix.removeQuark(this._ListVertices.search(removed));
 		this._ListVertices.remove(removed);
 	}
-	
-	
+
+
 	/**
 	 * Elimina por medio de un dato un vertice del grafo.
 	 * @param pDato {@link String}
@@ -153,7 +153,7 @@ public class Graph <T extends Comparable<T> >
 		this._Matrix.removeQuark(this._ListVertices.search(removed));
 		this._ListVertices.remove(removed);
 	}
-	
+
 	/**
 	 * Elimina una arista por medio de dos etiqueta dadas.
 	 * @param pEdge {@link String}
@@ -171,8 +171,8 @@ public class Graph <T extends Comparable<T> >
 		edge.disconect();
 		this._ListAristas.remove(edge);
 	}
-	
-	
+
+
 	/**
 	 * Elimina una arista por medio de dos datos dados.
 	 * @param pEdge {@link String}
@@ -190,8 +190,8 @@ public class Graph <T extends Comparable<T> >
 		edge.disconect();
 		this._ListAristas.remove(edge);
 	}
-	
-	
+
+
 	protected Edge<T> searchEdge(Vertex<T> pVertexSaliente, Vertex<T> pVertexEntrante)
 	{
 		ListIterator<Edge<T>> iteratorOut = pVertexSaliente.getEdges().iterator();
@@ -207,7 +207,7 @@ public class Graph <T extends Comparable<T> >
 			}
 		}
 		throw new ItemNotFoundException("Arista Buscada");
-		
+
 	}
 	/**
 	 * Elimina una arista del grafo y desconecta la referencias 
@@ -222,7 +222,7 @@ public class Graph <T extends Comparable<T> >
 		//	Removicion de la Arista del Grafo
 		this._ListAristas.remove(pEdge);
 	}
-	
+
 	/**
 	 * Busca y retorna una arista con la etiqueta igual a la brindada.
 	 * @param pEtiqueta {@link String}
@@ -238,7 +238,7 @@ public class Graph <T extends Comparable<T> >
 		ListIterator<Edge<T>> iterator = this._ListAristas.iterator();
 		Edge<T> result = null;
 		Edge<T> tmp;
-		
+
 		//=====================================Busqueda===================================/
 		while(iterator.hasNext())
 		{
@@ -254,8 +254,8 @@ public class Graph <T extends Comparable<T> >
 			throw new ItemNotFoundException(pEtiqueta);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * Busca y retorna un vertice que contenda la misma etiqueta que
 	 * la etiqueta brindada.
@@ -271,7 +271,7 @@ public class Graph <T extends Comparable<T> >
 		ListIterator<Vertex<T>> iterator = this._ListVertices.iterator();
 		Vertex <T> result = null;
 		Vertex <T> tmp;
-		
+
 		//=====================================Busqueda===================================/
 		while(iterator.hasNext())
 		{
@@ -287,7 +287,7 @@ public class Graph <T extends Comparable<T> >
 			throw new ItemNotFoundException(pEtiqueta);
 		return result;
 	}
-	
+
 	/**
 	 * Busca y retorna un vertice que contenga un dato indicado.
 	 * @param pDato
@@ -316,7 +316,7 @@ public class Graph <T extends Comparable<T> >
 			throw new ItemNotFoundException(pDato.toString());
 		return result;
 	}
-	
+
 	/**
 	 * Imprime las conexiones que cada vertices presenta. Sus listas de entradas y de salidas.
 	 */
@@ -328,71 +328,145 @@ public class Graph <T extends Comparable<T> >
 			iterator.next().printConexiones();
 		}
 	}
-	
+
 	public GraphIterator<T> iterator(String pVertex)
 	{
 		return new GraphIterator<T>(this, pVertex);
 	}
-	
+
 	public GraphIterator<T> iterator(T pVertex)
 	{
 		return new GraphIterator<T>(this, pVertex);
 	}
-	
+
 	public T search(String pEtiqueta)
 	{
 		return this.searchVertexID(pEtiqueta).getDato();
 	}
-	
+
 	public String search(T pDato)
 	{
 		return this.searchVertex(pDato).getID();
 	}
-	
+
 	public void runDijkstra(T pVerticeInicial)
 	{
-		
+
 	}
-	
+
 	public void runFloyd()
 	{
-		
+		int[][] ans = this.toArray();
+		int n = ans.length;
+
+		for (int k=0; k< n;k++) 
+		{
+			for (int i=0; i<n; i++) {
+				for (int j=0; j<n;j++) 
+				{        
+					if (ans[i][k]+ans[k][j] < ans[i][j]) 
+					{
+						ans[i][j] = ans[i][k]+ans[k][j];
+						
+					}
+				}
+			}
+		}
 	}
-	
+
 	public ListIterator<T>  iterator( )
 	{
-		
+
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @deprecated
-	 */
-	private List<Vertex<T>> getCamino()
-	{
-		
-		return null;
-	}
-	
-	public void printMatriz()
-	{
-		this._Matrix.print();
-	}
-	
-	public static void main(String[] args)
-	{
-		Graph<Integer> tmp = new Graph<Integer>();
-		tmp.add(23, "H");
-		tmp.add(121, "F");
-		tmp.add(123, "V");
-		tmp.conect(23, 123);
-		tmp.printMatriz();
-		tmp.printVertex();
-		tmp.conect(23, 121);
-		tmp.printMatriz();
-		tmp.printVertex();
-		tmp.disconnect("H", "F");
-		tmp.printMatriz();
-	}
+
+	 public void printMatriz()
+	 {
+		 this._Matrix.print();
+	 }
+
+	 public int[][] toArray()
+	 {
+		 int [][] tmp = new int [this._Matrix.size()][this._Matrix.size()];
+		 ListIterator<List<Edge<T>>> piv = this._Matrix.iterator();
+		 for(int x = 0; x < tmp.length; x++)
+		 {
+			 ListIterator< Edge<T> > pivdata = piv.next().iterator();
+			 for(int i = 0; i < tmp[x].length; i++)
+			 {
+				 tmp[x][i] = pivdata.next().getWeigth();
+			 }
+		 }
+
+		 return tmp;
+
+	 }
+
+	 public String arraytoString(int[][] pArreglo)
+	 {
+		 String result = "[ ";
+		 for(int x = 0; x < pArreglo.length; x++)
+		 {
+			 result += "\n[" + "\t";
+			 int[] tmparray = pArreglo[x];
+			 for(int i = 0; i < tmparray.length; i++)
+			 {
+				 result += tmparray[i] + ", ";
+			 }
+			 result += " ]";
+		 }
+		 result += " ]";
+		 return result;
+	 }
+	 public static void main(String[] args)
+	 {
+		 Graph<Integer> g = new Graph<Integer>();
+		 g.add(1, "nodin");		 
+		 g.add(2, "juan");
+		 g.add(3, "nodae");
+		 g.add(4, "nad");
+
+		 
+		 g.conect(2, 4, 1);
+		 g.conect(4, 2, 1);
+		 
+		 g.conect(3, 4, 2);
+		 g.conect(4, 3, 2);
+		 g.conect(3, 2, 1);
+		 
+		 g.conect(1, 2, 4);
+		 g.conect(2, 1, 4);
+		 g.conect(1, 3, 2);
+		 g.conect(3, 1, 2);
+		 
+		 g.conect(1, 4, 5);
+		 g.conect(4, 1, 5);
+		 g.printMatriz();
+		 g.runFloyd();
+		 g.printMatriz();
+	 }
+	 
+	 public void conect( T pVerticeSaliente, T pVerticeEntrante, int pPeso )
+		{
+			/*------------------------------Preparacion por la adicion--------------------------*/
+			Edge<T> tmpedge = new Edge<T>(pPeso);
+
+
+			//	Busqueda de los vertices correspondientes
+			Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
+			Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
+			
+			this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
+			//	Impresion de la conexion
+			//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
+
+			/*----------------------------Asignacion de Referencias-------------------------------*/
+			tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
+
+			//	Adición a la base de datos interna.
+			this._Matrix.set(tmpedge, 
+					this._ListVertices.search(tmpvertexsaliente), 
+					this._ListVertices.search(tmpvertexentrante));
+			this._ListAristas.add( tmpedge );
+		}
 }

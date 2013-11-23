@@ -2,6 +2,7 @@ package DataStructures.grafopack;
 
 
 import DataStructures.linkedlistpack.List;
+import DataStructures.linkedlistpack.ListIterator;
 
 public class Vertex <T extends Comparable<T> > implements Comparable<T>
 {

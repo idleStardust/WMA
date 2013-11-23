@@ -14,18 +14,11 @@ public class Matrix < T >  extends List< List<T> >
 {
 	int _NumColumnas;
 
-	public void addQuark(T pDato)
+	public void addQuark(T pDato, T pValorDefault)
 	{
 		this.add(new List<T>());
-		if(this.size() == 1)
-		{
-			this.search(0).add(pDato);
-		}
-		else
-		{
-			this.fillRow(pDato);
-			this.fillColumn(pDato);
-		}
+		this.fillRow(pDato, pValorDefault);
+		this.fillColumn(pDato);
 	}
 	
 	public void removeQuark(int pIndice)
@@ -40,11 +33,12 @@ public class Matrix < T >  extends List< List<T> >
 		for(int x =0; x < this.size()-1; x++)
 			list.next().add(pDato);
 	}
-	private void fillRow(T pDato)
+	private void fillRow(T pDato,T pValorDefault)
 	{
 		List<T> list = this.search(this.size()-1);
-		for(int x =0; x < this.size(); x++)
+		for(int x =0; x < this.size()-1; x++)
 			list.add(pDato);
+		list.add(pValorDefault);
 	}
 
 	@SuppressWarnings("unused")
