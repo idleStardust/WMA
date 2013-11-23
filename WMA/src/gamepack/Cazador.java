@@ -1,5 +1,7 @@
 package gamepack;
 
+import DataStructures.linkedlistpack.List;
+
 public class Cazador extends Thread{
 	private int _points;
 	private String _id;
@@ -10,6 +12,7 @@ public class Cazador extends Thread{
 	private String _foreingRegion;
 	private String _target;
 	private boolean _mover;
+	private List<Region> _Direccion;
 	
 	public Cazador() {
 		// TODO Auto-generated constructor stub
