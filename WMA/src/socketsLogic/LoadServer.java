@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import managerpack.MainManager;
+
 
 public class LoadServer {
 	
@@ -18,8 +20,9 @@ public class LoadServer {
 	        TrafficLogic data = new TrafficLogic();
 	        try {
 	        	server = new ServerSocket(port, maxGamers);
-	            
+	            MainManager.getInstance().evaluar();
 	            while (true) {
+	            	
 	                System.out.println("waiting for new clients");
 	                socket = server.accept();
 	                System.out.println("client " + socket.getInetAddress().getHostName() + " connected.");

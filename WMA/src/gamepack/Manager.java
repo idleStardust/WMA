@@ -11,6 +11,7 @@ public class Manager {
 	public Manager(){
 		_supergrafo = new Graph<Dominio>();
 		_dominio = new Dominio("192.168.1.1");
+		_supergrafo.add(_dominio, "192.168.1.1");
 	}
 	
 	public void llamarCazador(String pId){
@@ -28,13 +29,13 @@ public class Manager {
 		NormalRegion region = new NormalRegion(_ip, null);
 		
 		_dominio.getGraph().add(region,region.getID());
-		return region.getID();
+		return region.toString();
 	}
 	
 	public String crearRegionLocal(Arduino pArduino){
 		NormalRegion region = new NormalRegion(_ip, pArduino);
 		_dominio.getGraph().add(region,region.getID());
-		return region.getID();
+		return region.toString();
 	}
 	
 	public String crearRegionExtrangera(String pID, String pIp,Arduino pArduino){
