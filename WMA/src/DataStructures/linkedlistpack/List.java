@@ -84,8 +84,7 @@ public class List < T > implements Iterable<T>
 	
 	public void print()
 	{
-		ListIterator<T> iterator = 
-				this.iterator();
+		ListIterator<T> iterator = this.iterator();
 		System.out.print("[ ");
 		while(iterator.hasNext())
 		{
@@ -99,14 +98,8 @@ public class List < T > implements Iterable<T>
 		ListIterator<T> iterator = this.iterator();
 		String result = "[ ";
 		while(iterator.hasNext())
-		{
-			T tmp = iterator.next();
-			if(tmp == null)
-				result += "null, ";
-			else
-				result += iterator.next().toString() + ", ";
-		}
-		result += " ]";
+			result += "\t" + iterator.next().toString() + ", ";
+		result += "\t]";
 		return result;
 	}
 	/**
@@ -227,7 +220,6 @@ public class List < T > implements Iterable<T>
 			for(int x = 0 ; x < pIndice; x++)
 			{
 				tmp = tmp.getNext();
-				System.out.println(tmp);
 			}
 			tmp.setData(pDato);
 		}

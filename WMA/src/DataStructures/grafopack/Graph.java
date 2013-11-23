@@ -33,7 +33,7 @@ public class Graph <T extends Comparable<T> >
 	public void add( T pDato, String pEtiqueta )
 	{
 		this._ListVertices.add( new Vertex<T>(pDato, pEtiqueta) );
-		this._Matrix.addQuark();
+		this._Matrix.addQuark(new Edge<T>(1000));
 	}
 	
 	/**
@@ -52,14 +52,12 @@ public class Graph <T extends Comparable<T> >
 		//	Busqueda de los vertices correspondientes
 		Vertex<T> tmpvertexsaliente = this.searchVertexID(pVerticeSaliente);
 		Vertex<T> tmpvertexentrante = this.searchVertexID(pVerticeEntrante);
-		
+		this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		//	Impresion de la conexion
 		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		
 		/*----------------------------Asignacion de Referencias-------------------------------*/
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
-		tmpvertexentrante.conectEdge(tmpedge);
-		tmpvertexsaliente.conectEdge(tmpedge);
 		
 		//	Adición a la base de datos interna.
 		this._Matrix.set(tmpedge, 
@@ -77,14 +75,12 @@ public class Graph <T extends Comparable<T> >
 		//	Busqueda de los vertices correspondientes
 		Vertex<T> tmpvertexsaliente = this.searchVertex(pVerticeSaliente);
 		Vertex<T> tmpvertexentrante = this.searchVertex(pVerticeEntrante);
-		
+		this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		//	Impresion de la conexion
 		//this.printEdgeConection(tmpvertexsaliente, tmpvertexentrante);
 		
 		/*----------------------------Asignacion de Referencias-------------------------------*/
 		tmpedge.conect(tmpvertexsaliente, tmpvertexentrante);
-		tmpvertexentrante.conectEdge(tmpedge);
-		tmpvertexsaliente.conectEdge(tmpedge);
 		
 		//	Adición a la base de datos interna.
 		this._Matrix.set(tmpedge, 
@@ -166,13 +162,13 @@ public class Graph <T extends Comparable<T> >
 	 */
 	public void disconnect(String pEtiqueta, String pOtraEtiqueta)
 	{
-		Vertex<T> vertex1 = this.searchVertexID(pEtiqueta);
-		Vertex<T> vertex2 = this.searchVertexID(pOtraEtiqueta);
-		Edge<T> edge = this.searchEdge(vertex1, vertex2);
+		Vertex<T> vertex2 = this.searchVertexID(pEtiqueta);
+		Vertex<T> vertex1 = this.searchVertexID(pOtraEtiqueta);
+		Edge<T> edge = this.searchEdge(vertex2, vertex1);
+		this._Matrix.set(new Edge<T>(1000), 
+				this._ListVertices.search(vertex2), 
+				this._ListVertices.search(vertex1));
 		edge.disconect();
-		this._Matrix.set(null, 
-				this._ListVertices.search(vertex1), 
-				this._ListVertices.search(vertex2));
 		this._ListAristas.remove(edge);
 	}
 	
@@ -185,13 +181,13 @@ public class Graph <T extends Comparable<T> >
 	 */
 	public void disconnect(T pDato, T pOtroDato)
 	{
-		Vertex<T> vertex1 = this.searchVertex(pDato);
-		Vertex<T> vertex2 = this.searchVertex(pOtroDato);
-		Edge<T> edge = this.searchEdge(vertex1, vertex2);
+		Vertex<T> vertexsaliente = this.searchVertex(pDato);
+		Vertex<T> vertexentrante = this.searchVertex(pOtroDato);
+		Edge<T> edge = this.searchEdge(vertexsaliente, vertexentrante);
+		this._Matrix.set(new Edge<T>(1000), 
+				this._ListVertices.search(vertexsaliente), 
+				this._ListVertices.search(vertexentrante));
 		edge.disconect();
-		this._Matrix.set(null, 
-				this._ListVertices.search(vertex1), 
-				this._ListVertices.search(vertex2));
 		this._ListAristas.remove(edge);
 	}
 	
@@ -200,13 +196,13 @@ public class Graph <T extends Comparable<T> >
 	{
 		ListIterator<Edge<T>> iteratorOut = pVertexSaliente.getEdges().iterator();
 		ListIterator<Edge<T>> iteratorIn = pVertexEntrante.getEdges().iterator();
-		while(iteratorOut.hasNext())
+		while(iteratorIn.hasNext())
 		{
-			Edge<T> tmpOut = iteratorOut.next();
-			while(iteratorIn.hasNext())
+			Edge<T> tmpIn = iteratorIn.next();
+			while(iteratorOut.hasNext())
 			{
-				Edge<T> tmpIn = iteratorIn.next();
-				if(tmpOut.equals(tmpIn))
+				Edge<T> tmpOut = iteratorOut.next();
+				if(tmpIn.equals(tmpOut))
 					return tmpIn;
 			}
 		}
@@ -390,8 +386,13 @@ public class Graph <T extends Comparable<T> >
 		tmp.add(23, "H");
 		tmp.add(121, "F");
 		tmp.add(123, "V");
+		tmp.conect(23, 123);
 		tmp.printMatriz();
+		tmp.printVertex();
 		tmp.conect(23, 121);
+		tmp.printMatriz();
+		tmp.printVertex();
+		tmp.disconnect("H", "F");
 		tmp.printMatriz();
 	}
 }

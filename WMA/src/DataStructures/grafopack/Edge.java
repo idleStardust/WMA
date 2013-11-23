@@ -28,6 +28,8 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 		//Conexion de los Nodos
 		this._Salida.conectOutput(this._Entrada);
 		this._Entrada.conectInput(this._Salida);
+		this._Salida.conectEdge(this);
+		this._Entrada.conectEdge(this);
 	}
 	
 	public String getID()
@@ -56,8 +58,8 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 		this._Salida.disconectOutput(this._Entrada);
 		this._Entrada.disconectInput(this._Salida);
 		// Remover Aristas
-		//this._Salida.disconectEdge(this);
-		//this._Entrada.disconectEdge(this);
+		this._Salida.disconectEdge(this);
+		this._Entrada.disconectEdge(this);
 	}
 	
 	void print()
@@ -80,5 +82,10 @@ public class Edge <T extends Comparable<T> > implements Comparable<Edge<T>>
 		else if(this._Peso > o.getWeigth())
 			index = 1;
 		return index;
+	}
+	
+	public String toString()
+	{
+		return "Edge: " + this._Peso;
 	}
 }

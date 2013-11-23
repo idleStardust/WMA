@@ -1,6 +1,7 @@
 package DataStructures.linkedlistpack;
 
 
+
 /*
  * -------------------------------Public Operations----------------------------
  * 	----> addQuark( )
@@ -13,28 +14,17 @@ public class Matrix < T >  extends List< List<T> >
 {
 	int _NumColumnas;
 
-	public Matrix()
-	{
-		this(0);
-	}
-
-	public Matrix(int pCant)
-	{
-		for(int x = 0; x < pCant; x++)
-		this.addQuark();
-	}
-
-	public void addQuark()
+	public void addQuark(T pDato)
 	{
 		this.add(new List<T>());
 		if(this.size() == 1)
 		{
-			this.search(0).add(null);
+			this.search(0).add(pDato);
 		}
 		else
 		{
-			this.fillRow(null);
-			this.fillColumn(null);
+			this.fillRow(pDato);
+			this.fillColumn(pDato);
 		}
 	}
 	
@@ -76,45 +66,31 @@ public class Matrix < T >  extends List< List<T> >
 		}
 	}
 
-	/**
-	 * Anadir una columna de datos
-	 * @param pDato
-	 * @param pIndex
-	 */
-	@SuppressWarnings("unused")
-	private void addColumn(T pDato, int pIndex)
-	{
-		ListIterator<List<T>> iterator = this.iterator();
-		while( iterator.hasNext() )
-		{
-			iterator.next().add(pDato, pIndex);;
-		}
-	}
 	public T search(int pFila, int pColumna)
 	{
 		return this.search(pFila).search(pColumna);
 	}
-
-	public void print()
-	{
-		System.out.println(this.toString());
-	}
-
+	
+	@Override
 	public String toString()
 	{
 		String result = "[ \n ";
 		ListIterator<List<T>> iterator = this.iterator();
+	
 		while( iterator.hasNext() )
-		{
-			result += iterator.next().toString() + "\n ";
-		}
+			result +=  iterator.next().toString() + "\n ";
+		
 		result += "\n]";
 		return result;
 	}
-
+	
+	@Override
+	public void print()
+	{
+		System.out.println(this.toString());
+	}
 	public void set( T pDato, int pFila, int pColumna )
 	{
-		System.out.println(this.search(pFila).search(pColumna));
-		this.searchVertex();
+		this.search(pFila).set(pDato, pColumna);
 	}
 }
