@@ -40,8 +40,7 @@ public class MainManager implements ConstantsServer {
 			e.printStackTrace();
 		}
 		
-		
-		
+			
 	}
 	
 	private void init(){
