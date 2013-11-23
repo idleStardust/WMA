@@ -27,7 +27,6 @@ public class MainManager implements ConstantsServer {
 	public void initServer(){
 		LoadServer mainServer= new LoadServer();
 	}
-	
 	public void initClient(){
 		
         try {
@@ -58,7 +57,7 @@ public class MainManager implements ConstantsServer {
 	
 	
 	public void evaluar(){
-		System.out.println( "pasó por evaluar: " );
+		System.out.println( "pas�� por evaluar: " );
 		main.initClient();
 	    //main.init();
 	}
@@ -129,15 +128,7 @@ public class MainManager implements ConstantsServer {
 	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }

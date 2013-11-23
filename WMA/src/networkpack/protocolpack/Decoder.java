@@ -8,9 +8,7 @@ public class Decoder {
 	public Decoder(){}
 	
 	
-	public static void main(String[] args) {
-		//_singletonDecoder.Decode("<correspondence%id=lun 11 de nov 12:53%from=192.168.0.2%to=all%type=node%action=create%contains=ardunio@1%details=ID:node@533#domain:192.168.0.2/>");
-	}
+	
 	public static Decoder getInstance(){
 		return _singletonDecoder;
 	}
@@ -22,7 +20,6 @@ public class Decoder {
 		String [] a= msg_verif(msg_recieve);
 		if (a!=null){
 			if(a[5].equals(Constantes.ACCION_CREAR)){
-				System.out.println("noooooooooooooooooooodooooooooo "+a[6].split("#")[0] + " "+ a[6].split("#")[1]);
 				MainManager.getInstance().getManager().crearRegionExtrangera(a[6].split("#")[0].replace("ID:", ""), a[6].split("#")[1].replaceFirst("Domain:", ""), null);
 			}
 		}
