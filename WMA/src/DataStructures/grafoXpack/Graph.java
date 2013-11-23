@@ -187,14 +187,14 @@ public class Graph<T extends Comparable<T> >
 		
 		in.conect(2, 4, 1);
 		in.conect(4, 2, 1);
-		in.printMatrices();
-		
+		in.disconnect(2, 4);
+		//in.printMatrices();
 		in.runFloyd();
-		in.printVertex();
 		
-		System.out.println("After Floyd");
+		//System.out.println("After Floyd");
 		
-		in.printMatrices();
+		//in.printMatrices();
+		in.getCamino(3, 3).print();
 	}
 	
 	public void runFloyd()
@@ -257,18 +257,50 @@ public class Graph<T extends Comparable<T> >
 		System.out.println(this.arraytoString(pArreglo));
 	}
 	
-	public void getCamino (T pVertex, T pOtroVertex)
+	public ListIterator<T> getCaminoIterator(T pVertex, T pOtroVertex)
+	{
+		return this.getCamino(pVertex, pOtroVertex).iterator();
+	}
+	
+	public List<T> getCamino (T pVertex, T pOtroVertex)
 	{
 		//	Vertices
 		Vertex<T> verticesalida = this.searchG(pVertex);
 		Vertex<T> verticeentrada = this.searchG(pOtroVertex);
 		
+		// Indices de la Matriz
+		int vOut = this._ListVertex.search(verticesalida);
+		int vIn = this._ListVertex.search(verticeentrada);
+		/*
+		System.out.println("Indices");
+		System.out.println(vIn);
+		System.out.println(vOut);
+		System.out.println("Vertices: ");
+		System.out.println(verticesalida);
+		System.out.println(verticeentrada);
+		*/
 		//	El camino
-		List<Vertex<T>> elcamino = new List<Vertex<T>>();
-		
-		
-		
-		
-		
+		List<T> elcamino = new List<T>();
+		boolean flag = true;
+		while(flag)
+		{
+			/*
+			System.out.println("Indice Salida: " + vOut);
+			System.out.println("Indice Llegada: " + vIn);*/
+
+			if(vIn == vOut)
+				flag = false;
+			else
+			{
+				Vertex<T> tmp = this._MatrizAdj.search(vOut, vIn);
+				vOut = this._ListVertex.search(tmp);
+				//System.out.println(tmp);
+				//System.out.println(elcamino);
+				verticesalida = tmp;
+				vIn = this._ListVertex.search(verticesalida);
+				elcamino.add(tmp.getDato());
+			}
+		}
+		return elcamino;
 	}
 }

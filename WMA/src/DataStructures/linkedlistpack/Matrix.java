@@ -71,8 +71,8 @@ public class Matrix < T >  extends List< List<T> >
 		String result = "[ \n ";
 		ListIterator<List<T>> iterator = this.iterator();
 	
-		while( iterator.hasNext() )
-			result +=  iterator.next().toString() + "\n ";
+		for( int x = 0; iterator.hasNext(); x++ )
+			result +=  x + iterator.next().toString() + "\n ";
 		
 		result += "\n]";
 		return result;
