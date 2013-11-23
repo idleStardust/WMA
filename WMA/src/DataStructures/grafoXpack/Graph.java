@@ -252,4 +252,12 @@ public class Graph<T extends Comparable<T> >
 	{
 		System.out.println(this.arraytoString(pArreglo));
 	}
+	
+	public ListIterator<T> runDjikstra(T pNodoInicial, T pNodoFinal)
+	{
+		Vertex<T> nodoinicial = this.searchG(pNodoInicial);
+		Vertex<T> nodofinal = this.searchG(pNodoFinal);
+		//return this.runDjistra(nodoinicial, nodofinal);
+		return null;
+	}
 }
