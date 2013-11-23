@@ -82,6 +82,7 @@ public class MainManager implements ConstantsServer {
 	    }
 	    else if(input.equals("1")){
 		    System.out.println( "entro a 1: " );
+		    main.initClient();
 		    
 	    	
 	    }
@@ -91,28 +92,7 @@ public class MainManager implements ConstantsServer {
 	    	
 	    }
 	    
-	    Scanner scanner2 = new Scanner( System.in );
-
-	    System.out.println( "tipo de conexion: " );
-	    
-	    
-	    String input2 = scanner2.nextLine();
-	    
-	    if(input2.equals("server")){
-	    	main.initServer();
-	    	
-	    }
-	    else if(input2.equals("1")){
-		    System.out.println( "entro a 1: " );
-		    main.initClient();
-		    main.init();
-	    	
-	    }
-	    else if(input2.equals("2")){
-		    System.out.println( "entro a 1: " );
-		    
-	    	
-	    }
+	   
 	    
 	    
 	    
