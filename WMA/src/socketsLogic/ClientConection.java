@@ -16,7 +16,6 @@ public class ClientConection extends Thread implements Observer {
 	public ClientConection(Socket socket, TrafficLogic pData) {
 		this.socket = socket;
 		this.data = pData;
-
 		try {
 			inputData = new DataInputStream(socket.getInputStream());
 			ouputData = new DataOutputStream(socket.getOutputStream());

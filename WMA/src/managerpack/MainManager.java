@@ -47,6 +47,7 @@ public class MainManager implements ConstantsServer {
 		System.out.println("init!!!!");
 		for (int x = 0; x < 20; x++){
 			String a = _graphManager.crearRegionLocal();
+			
 			//managerEncoder.crearNodo(a);
 			f.sendmsg(managerEncoder.crearNodo(a));	
 		}		
