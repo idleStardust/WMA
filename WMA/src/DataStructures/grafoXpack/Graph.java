@@ -79,7 +79,7 @@ public class Graph<T extends Comparable<T> >
 		
 		//	Se anaden los datos a las matrices
 		this._MatrizPeso.set(pPeso, nodosaliente, nodoentrante);
-		this._MatrizAdj.set(pOtroNodo, nodosaliente, nodoentrante);
+		this._MatrizAdj.set(pNodo, nodosaliente, nodoentrante);
 		//
 	}
 	
@@ -102,7 +102,7 @@ public class Graph<T extends Comparable<T> >
 		
 		//	Se anaden los datos a las matrices
 		this._MatrizPeso.set(Graph.INFINITO, nodosaliente, nodoentrante);
-		this._MatrizAdj.set(new Vertex<T>(null,"null"), nodosaliente, nodoentrante);
+		this._MatrizAdj.set(new Vertex<T>(null,"Not Conected"), nodosaliente, nodoentrante);
 		//
 	}
 	
@@ -119,6 +119,9 @@ public class Graph<T extends Comparable<T> >
 		}
 		throw new ItemNotFoundException(pVertex);
 	}
+	
+	
+	
 	private void addSpaceMatrizPeso()
 	{
 		this._MatrizPeso.addQuark(Graph.INFINITO, Graph.SELF);
@@ -187,8 +190,9 @@ public class Graph<T extends Comparable<T> >
 		in.printMatrices();
 		
 		in.runFloyd();
+		in.printVertex();
 		
-		System.out.println("After Floy");
+		System.out.println("After Floyd");
 		
 		in.printMatrices();
 	}
@@ -253,11 +257,18 @@ public class Graph<T extends Comparable<T> >
 		System.out.println(this.arraytoString(pArreglo));
 	}
 	
-	public ListIterator<T> runDjikstra(T pNodoInicial, T pNodoFinal)
+	public void getCamino (T pVertex, T pOtroVertex)
 	{
-		Vertex<T> nodoinicial = this.searchG(pNodoInicial);
-		Vertex<T> nodofinal = this.searchG(pNodoFinal);
-		//return this.runDjistra(nodoinicial, nodofinal);
-		return null;
+		//	Vertices
+		Vertex<T> verticesalida = this.searchG(pVertex);
+		Vertex<T> verticeentrada = this.searchG(pOtroVertex);
+		
+		//	El camino
+		List<Vertex<T>> elcamino = new List<Vertex<T>>();
+		
+		
+		
+		
+		
 	}
 }

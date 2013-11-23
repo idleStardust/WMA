@@ -1,6 +1,7 @@
 package DataStructures.grafoXpack;
 
 import DataStructures.linkedlistpack.List;
+import DataStructures.linkedlistpack.ListIterator;
 
 
 
@@ -10,7 +11,6 @@ public class Vertex<T extends Comparable<T>> implements Comparable<T>
 
 	List< Vertex<T> > _ListCon;
 	List<Integer> _PesoAdy;
-	List< Vertex<T> > _ListAdy;
 	
 	T _Dato;
 	
@@ -67,6 +67,13 @@ public class Vertex<T extends Comparable<T>> implements Comparable<T>
 			return "Dato del Vertice: " + this.getDato().toString();
 	}
 
+	protected void printConexiones()
+	{
+		ListIterator<Vertex<T>> it = this._ListCon.iterator();
+		System.out.println("Conexiones: ");
+		while(it.hasNext())
+			it.next().print();
+	}
 	@Override
 	public int compareTo(T o)
 	{
