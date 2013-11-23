@@ -49,6 +49,22 @@ public class Encoder {
 		
 	}
 	
+	public String borrarNodo(String pContenido){
+		String msg ="<" + 
+				Constantes.CORREPONDENCIA_ETIQUETA + "%"+
+				Constantes.ATRIBUTO_ID + "=" + "nuevoNodo" +"%"+
+				Constantes.ATRIBUTO_FROM + "=" + _from +"%"+
+				Constantes.ATRIBUTO_TO+ "=" + _to+"%"+
+				Constantes.ATRIBUTO_TYPE+ "="+ Constantes.NODO_NORMAL+"%"+
+				Constantes.ATRIBUTO_ACTION+ "="+Constantes.ACCION_CREAR+"%"+
+				Constantes.ATRIBUTO_DETAILS+ "="+ pContenido+
+				"/>";
+		return msg;
+		
+	}
+	
+	
+	
 	
 }
 
