@@ -1,7 +1,7 @@
 package facadepack;
 
 public class facadeconexion {
-	SingletonProtocol envio_protocolo =new SingletonProtocol().getInstance();
+	FacadeProtocol envio_protocolo =new FacadeProtocol().getInstance();
 	
 	
 	

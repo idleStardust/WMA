@@ -12,6 +12,7 @@ public class TrafficLogic extends Observable{
         return data;
     }
     
+
     public void setData(String pData){
         this.data = pData;
         
