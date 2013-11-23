@@ -33,40 +33,31 @@ public class Matriz < T >  extends List< List<T> >
 		}
 		else
 		{
-			this.fillRow(null, this.size());
-			this.fillColumn(null, this.size()-1);
+			this.fillRow(null);
+			this.fillColumn(null);
 		}
 	}
 	
-	public static void main(String[] args)
+	public void removeQuark(int pIndice)
 	{
-		Matriz<Integer> m = new Matriz<Integer>();
-		m.addRow();
-		m.search(0).add(null);
-		m.print();
+		this.remove(pIndice);
+		this.removerColumn(pIndice);
 	}
-	public void fillColumn(T pDato, int pIndex)
+	
+	private void fillColumn(T pDato)
 	{
 		ListIterator<List<T>> list = this.iterator();
-		for(int x =0; x < pIndex-1; x++)
+		for(int x =0; x < this.size()-1; x++)
 			list.next().add(pDato);
 	}
-	public void fillRow(T pDato, int pIndex )
+	private void fillRow(T pDato)
 	{
-		List<T> list = this.search(pIndex);
-		for(int x =0; x < pIndex-1; x++)
+		List<T> list = this.search(this.size()-1);
+		for(int x =0; x < this.size(); x++)
 			list.add(pDato);
 	}
-	/**
-	 * Eliminar un indice y una columna a la vez.
-	 * @param pIndex
-	 */
-	public void removeQuark(int pIndex)
-	{
-		this.remove(pIndex);
-	}
 
-	protected void addRow()
+	private void addRow()
 	{
 		this.add(new List<T>());
 	}
@@ -75,7 +66,7 @@ public class Matriz < T >  extends List< List<T> >
 	 * Remover una columna
 	 * @param pIndex
 	 */
-	public void removerColumn(int pIndex)
+	private void removerColumn(int pIndex)
 	{
 		ListIterator<List<T>> iterator = this.iterator();
 		while( iterator.hasNext() )
@@ -89,7 +80,7 @@ public class Matriz < T >  extends List< List<T> >
 	 * @param pDato
 	 * @param pIndex
 	 */
-	public void addColumn(T pDato, int pIndex)
+	private void addColumn(T pDato, int pIndex)
 	{
 		ListIterator<List<T>> iterator = this.iterator();
 		while( iterator.hasNext() )
@@ -111,20 +102,12 @@ public class Matriz < T >  extends List< List<T> >
 	{
 		String result = "[ \n ";
 		ListIterator<List<T>> iterator = this.iterator();
-		System.out.print(iterator.hasNext());
 		while( iterator.hasNext() )
 		{
 			result += iterator.next().toString() + "\n ";
 		}
 		result += "\n]";
 		return result;
-	}
-
-	public void addToAllRaw(T pDato)
-	{
-		ListIterator<List<T>> iterator = this.iterator();
-		while( iterator.hasNext() )
-			iterator.next().add(pDato);
 	}
 
 	public void set( T pDato, int pFila, int pColumna )

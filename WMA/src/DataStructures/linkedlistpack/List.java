@@ -100,7 +100,11 @@ public class List < T > implements Iterable<T>
 		String result = "[ ";
 		while(iterator.hasNext())
 		{
-			result += iterator.next().toString() + ", ";
+			T tmp = iterator.next();
+			if(tmp == null)
+				result += "null, ";
+			else
+				result += iterator.next().toString() + ", ";
 		}
 		result += " ]";
 		return result;
