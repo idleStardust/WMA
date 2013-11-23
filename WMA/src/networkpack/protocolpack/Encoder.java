@@ -5,6 +5,7 @@ public class Encoder {
 	public Encoder(){}
 	public String _from = "a";
 	public String _to = "b";
+	//FacadeProtocol facadeprotoc= new FacadeProtocol.;
 	public static Encoder getInstance(){
 		return _singletonEncoder;
 	}
@@ -52,16 +53,56 @@ public class Encoder {
 	public String borrarNodo(String pContenido){
 		String msg ="<" + 
 				Constantes.CORREPONDENCIA_ETIQUETA + "%"+
-				Constantes.ATRIBUTO_ID + "=" + "nuevoNodo" +"%"+
+				Constantes.ATRIBUTO_ID + "=" + "borrarNodo" +"%"+
 				Constantes.ATRIBUTO_FROM + "=" + _from +"%"+
 				Constantes.ATRIBUTO_TO+ "=" + _to+"%"+
 				Constantes.ATRIBUTO_TYPE+ "="+ Constantes.NODO_NORMAL+"%"+
-				Constantes.ATRIBUTO_ACTION+ "="+Constantes.ACCION_CREAR+"%"+
+				Constantes.ATRIBUTO_ACTION+ "="+Constantes.ACCION_DESTRUIR+"%"+
 				Constantes.ATRIBUTO_DETAILS+ "="+ pContenido+
+				"/>";
+		
+		return msg;
+		
+	}
+	
+	
+	public String conectarNodos(String conector1, String conector2, String idLinker){
+		String msg ="<" + 
+				Constantes.CORREPONDENCIA_ETIQUETA + "%"+
+				Constantes.ATRIBUTO_ID + "=" + "conectarNodos" +"%"+
+				Constantes.ATRIBUTO_FROM + "=" + _from +"%"+
+				Constantes.ATRIBUTO_TO+ "=" + _to+"%"+
+				Constantes.ATRIBUTO_TYPE+ "="+ Constantes.CONECTOR+"%"+
+				Constantes.ATRIBUTO_ACTION+ "="+Constantes.ACCION_CONECTAR+"%"+
+				Constantes.ATRIBUTO_DETAILS+ "="+ idLinker+
+				Constantes.ATRIBUTO_IDA+ "="+ conector1+
+				Constantes.ATRIBUTO_IDB+ "="+ conector2+
+				
 				"/>";
 		return msg;
 		
 	}
+	
+	public String conectarNodosconex(String conector1, String conector2, String idLinker){
+		String msg ="<" + 
+				Constantes.CORREPONDENCIA_ETIQUETA + "%"+
+				Constantes.ATRIBUTO_ID + "=" + "conectarNodosconex" +"%"+
+				Constantes.ATRIBUTO_FROM + "=" + _from +"%"+
+				Constantes.ATRIBUTO_TO+ "=" + _to+"%"+
+				Constantes.ATRIBUTO_TYPE+ "="+ Constantes.CONECTOR_DE_RED+"%"+
+				Constantes.ATRIBUTO_ACTION+ "="+Constantes.ACCION_CONECTAR_POR_RED+"%"+
+				Constantes.ATRIBUTO_DETAILS+ "="+ idLinker+
+				Constantes.ATRIBUTO_IDA+ "="+ conector1+
+				Constantes.ATRIBUTO_IDB+ "="+ conector2+
+				
+				"/>";
+		return msg;
+		
+	}
+	
+	
+	
+	
 	
 	
 	

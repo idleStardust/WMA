@@ -20,7 +20,7 @@ public class Decoder {
 		String [] a= msg_verif(msg_recieve);
 		if (a!=null){
 			if(a[5].equals(Constantes.ACCION_CREAR)){
-				MainManager.getInstance().getManager().crearRegionExtrangera(a[6].split("#")[0].replace("ID:", ""), a[6].split("#")[1].replaceFirst("Domain:", ""), null);
+				MainManager.getInstance().getManager().crearRegionExtranjera(a[6].split("#")[0].replace("ID:", ""), a[6].split("#")[1].replaceFirst("Domain:", ""), null);
 			}
 		}
 		for(int x=0;x<a.length;x++){

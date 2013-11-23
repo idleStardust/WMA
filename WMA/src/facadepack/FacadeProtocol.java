@@ -1,10 +1,11 @@
 package facadepack;
 import networkpack.protocolpack.Encoder;
-public class SingletonProtocol {
-	private static SingletonProtocol _singletonProtocol = new SingletonProtocol();
+
+public class FacadeProtocol {
+	private static FacadeProtocol _singletonProtocol = new FacadeProtocol();
 	Encoder prueba=Encoder.getInstance();
 	
-	public static SingletonProtocol getInstance(){
+	public static FacadeProtocol getInstance(){
 		return _singletonProtocol;
 	}
 	
