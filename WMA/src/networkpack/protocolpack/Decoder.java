@@ -1,10 +1,11 @@
 package networkpack.protocolpack;
 
+import facadepack.FacadeProtocol;
 import managerpack.MainManager;
 
 public class Decoder {
 	private static Decoder _singletonDecoder = new Decoder();
-	
+	FacadeProtocol facadeprotoc= new FacadeProtocol().getInstance();
 	public Decoder(){}
 	
 	
@@ -17,22 +18,45 @@ public class Decoder {
 	public void Decode(String pMensaje){
 		System.out.println("Mensaje a decodificar"+pMensaje);
 		String[] msg_recieve=pMensaje.split("%");
-		String [] a= msg_verif(msg_recieve);
-		if (a!=null){
-			if(a[5].equals(Constantes.ACCION_CREAR)){
-				MainManager.getInstance().getManager().crearRegionExtranjera(a[6].split("#")[0].replace("ID:", ""), a[6].split("#")[1].replaceFirst("Domain:", ""), null);
+		String [] decodificar_msg= msg_verif(msg_recieve);
+		facadeprotoc.recibirMensaje(decodificar_msg);
+		
+		if (decodificar_msg!=null){
+			if(decodificar_msg[5].equals(Constantes.ACCION_CREAR)){
+				facadeprotoc.crearNodo(decodificar_msg);
 			}
+			
+			else if(decodificar_msg[5].equals(Constantes.ACCION_DESTRUIR)){
+				facadeprotoc.borrarNodo(decodificar_msg);
+			}
+			
+			else if(decodificar_msg[5].equals(Constantes.ACCION_CONECTAR)){
+				facadeprotoc.conectarNodos(decodificar_msg);
+			}
+			
+			else if(decodificar_msg[5].equals(Constantes.ACCION_CONECTAR_POR_RED)){
+				facadeprotoc.conectarNodoConexion(decodificar_msg);
+			}
+			else if(decodificar_msg[5].equals(Constantes.ACCION_DESCONECTAR_POR_RED)){
+				facadeprotoc.desconectarNodoConexion(decodificar_msg);
+			}
+			else if(decodificar_msg[5].equals(Constantes.ACCION_ASIGNAR_MISION)){
+				facadeprotoc.nuevaMission(decodificar_msg);
+			}
+			else if(decodificar_msg[5].equals(Constantes.ACCION_LLAMAR_CAZA_RECOMPENSAS)){
+				facadeprotoc.nuevaMission(decodificar_msg);
+			}
+			
+			
 		}
-		for(int x=0;x<a.length;x++){
+		for(int x=0;x<decodificar_msg.length;x++){
 			//System.out.println("elemento "+  x + "  " + a[x]  );
 		}
 
 	}
 
 
-	void msg_correct(){
-
-	}
+	
 
 
 	public String[] msg_verif(String[] toverif){	

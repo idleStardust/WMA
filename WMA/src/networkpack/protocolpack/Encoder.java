@@ -1,11 +1,12 @@
 package networkpack.protocolpack;
 
+import facadepack.FacadeProtocol;
+
 public class Encoder {
 	private static Encoder _singletonEncoder = new Encoder();
 	public Encoder(){}
 	public String _from = "a";
 	public String _to = "b";
-	//FacadeProtocol facadeprotoc= new FacadeProtocol.;
 	public static Encoder getInstance(){
 		return _singletonEncoder;
 	}
