@@ -225,7 +225,10 @@ public class List < T > implements Iterable<T>
 		{
 			ListNode<T> tmp = this.getHead();
 			for(int x = 0 ; x < pIndice; x++)
+			{
 				tmp = tmp.getNext();
+				System.out.println(tmp);
+			}
 			tmp.setData(pDato);
 		}
 		else

@@ -4,12 +4,13 @@ package DataStructures.grafopack;
 import DataStructures.exceptions.ItemNotFoundException;
 import DataStructures.linkedlistpack.ListIterator;
 import DataStructures.linkedlistpack.List;
+import DataStructures.linkedlistpack.Matrix;
 
 public class Graph <T extends Comparable<T> >
 {
 	List< Vertex<T> > _ListVertices;
 	List< Edge <T> > _ListAristas;
-	
+	Matrix<Edge<T>> _Matrix;
 	/**
 	 * Construye una estructura de datos de tipo 
 	 * <b>grafo</b> que contendra una coleccion de nodos y aristas
@@ -19,6 +20,7 @@ public class Graph <T extends Comparable<T> >
 		//---------------Inicializacion de listas bases de datos----------------------\\
 		this._ListVertices = new List<Vertex<T>>() ;
 		this._ListAristas = new List<Edge<T>>() ;
+		this._Matrix = new Matrix<Edge<T>>();
 	}
 	
 	/**
@@ -31,6 +33,7 @@ public class Graph <T extends Comparable<T> >
 	public void add( T pDato, String pEtiqueta )
 	{
 		this._ListVertices.add( new Vertex<T>(pDato, pEtiqueta) );
+		this._Matrix.addQuark();
 	}
 	
 	/**
@@ -59,6 +62,9 @@ public class Graph <T extends Comparable<T> >
 		tmpvertexsaliente.conectEdge(tmpedge);
 		
 		//	Adición a la base de datos interna.
+		this._Matrix.set(tmpedge, 
+				this._ListVertices.search(tmpvertexsaliente), 
+				this._ListVertices.search(tmpvertexentrante));
 		this._ListAristas.add( tmpedge );
 	}
 	
@@ -81,6 +87,9 @@ public class Graph <T extends Comparable<T> >
 		tmpvertexsaliente.conectEdge(tmpedge);
 		
 		//	Adición a la base de datos interna.
+		this._Matrix.set(tmpedge, 
+				this._ListVertices.search(tmpvertexsaliente), 
+				this._ListVertices.search(tmpvertexentrante));
 		this._ListAristas.add( tmpedge );
 	}
 	/**
@@ -118,6 +127,7 @@ public class Graph <T extends Comparable<T> >
 			}
 		}
 		//	Removicion de la base de datos interna
+		this._Matrix.removeQuark(this._ListVertices.search(removed));
 		this._ListVertices.remove(removed);
 	}
 	
@@ -144,6 +154,7 @@ public class Graph <T extends Comparable<T> >
 			}
 		}
 		//	Removicion de la base de datos interna
+		this._Matrix.removeQuark(this._ListVertices.search(removed));
 		this._ListVertices.remove(removed);
 	}
 	
@@ -159,6 +170,10 @@ public class Graph <T extends Comparable<T> >
 		Vertex<T> vertex2 = this.searchVertexID(pOtraEtiqueta);
 		Edge<T> edge = this.searchEdge(vertex1, vertex2);
 		edge.disconect();
+		this._Matrix.set(null, 
+				this._ListVertices.search(vertex1), 
+				this._ListVertices.search(vertex2));
+		this._ListAristas.remove(edge);
 	}
 	
 	
@@ -174,6 +189,10 @@ public class Graph <T extends Comparable<T> >
 		Vertex<T> vertex2 = this.searchVertex(pOtroDato);
 		Edge<T> edge = this.searchEdge(vertex1, vertex2);
 		edge.disconect();
+		this._Matrix.set(null, 
+				this._ListVertices.search(vertex1), 
+				this._ListVertices.search(vertex2));
+		this._ListAristas.remove(edge);
 	}
 	
 	
@@ -342,5 +361,37 @@ public class Graph <T extends Comparable<T> >
 	public void runFloyd()
 	{
 		
+	}
+	
+	public ListIterator<T>  iterator( )
+	{
+		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @deprecated
+	 */
+	private List<Vertex<T>> getCamino()
+	{
+		
+		return null;
+	}
+	
+	public void printMatriz()
+	{
+		this._Matrix.print();
+	}
+	
+	public static void main(String[] args)
+	{
+		Graph<Integer> tmp = new Graph<Integer>();
+		tmp.add(23, "H");
+		tmp.add(121, "F");
+		tmp.add(123, "V");
+		tmp.printMatriz();
+		tmp.conect(23, 121);
+		tmp.printMatriz();
 	}
 }

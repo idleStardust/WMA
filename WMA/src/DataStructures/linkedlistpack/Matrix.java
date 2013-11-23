@@ -1,93 +1,120 @@
 package DataStructures.linkedlistpack;
 
-public class Matrix < T >
+
+/*
+ * -------------------------------Public Operations----------------------------
+ * 	----> addQuark( )
+ *  ----> removeQuark ( )
+ *  ----> search ( )
+ *  ----> set ( )
+ * ------------------------------Private Operations----------------------------
+ */
+public class Matrix < T >  extends List< List<T> >
 {
-	private List < List<T> > _Matrix;
-	
-	public Matrix(int pNumber)
-	{
-		this._Matrix = new List< List<T> >();
-		for(int x = 0; x < pNumber; x++)
-		{
-			this.addRow();
-		}
-		for(int x = 0; x < pNumber; x++)
-		{
-			this.addColumn();
-		}
-	}
-	public Matrix() 
+	int _NumColumnas;
+
+	public Matrix()
 	{
 		this(0);
 	}
-	
-	public void addRow()
+
+	public Matrix(int pCant)
 	{
-		this._Matrix.add(new List<T>());
+		for(int x = 0; x < pCant; x++)
+		this.addQuark();
+	}
+
+	public void addQuark()
+	{
+		this.add(new List<T>());
+		if(this.size() == 1)
+		{
+			this.search(0).add(null);
+		}
+		else
+		{
+			this.fillRow(null);
+			this.fillColumn(null);
+		}
 	}
 	
-	public void addColumn()
+	public void removeQuark(int pIndice)
 	{
-		ListIterator<List<T>> iterator = this._Matrix.iterator();
-		while( iterator.hasNext() )
-			iterator.next().add(null);
+		this.remove(pIndice);
+		this.removerColumn(pIndice);
 	}
 	
-	public void addToAllRaw(T pDato)
+	private void fillColumn(T pDato)
 	{
-		ListIterator<List<T>> iterator = this._Matrix.iterator();
-		while( iterator.hasNext() )
-			iterator.next().add(pDato);
+		ListIterator<List<T>> list = this.iterator();
+		for(int x =0; x < this.size()-1; x++)
+			list.next().add(pDato);
 	}
-	public void add( T pDato, int pFila, int pColumna )
+	private void fillRow(T pDato)
 	{
-		this._Matrix.search(pFila).add(pDato, pColumna);
+		List<T> list = this.search(this.size()-1);
+		for(int x =0; x < this.size(); x++)
+			list.add(pDato);
 	}
-	
-	public void set( T pDato, int pFila, int pColumna )
+
+	@SuppressWarnings("unused")
+	private void addRow()
 	{
-		this._Matrix.search(pFila).set(pDato, pColumna);
+		this.add(new List<T>());
 	}
-	
-	public T search( int pFila, int pColumna  )
-	{
-		return this._Matrix.search(pFila).search(pColumna);
-	}
-	
-	
+
 	/**
-	 * 
-	 * @param pFila
+	 * Remover una columna
+	 * @param pIndex
 	 */
-	public void removeRow(int pFila)
+	private void removerColumn(int pIndex)
 	{
-		this._Matrix.remove(pFila);
-	}
-	
-	/**
-	 * 
-	 * @param pFila
-	 */
-	public void remove(int pFila)
-	{
-		ListIterator<List<T>> iterator = this._Matrix.iterator();
+		ListIterator<List<T>> iterator = this.iterator();
 		while( iterator.hasNext() )
-			iterator.next().remove(pFila);
+		{
+			iterator.next().remove(pIndex);
+		}
 	}
-	
+
 	/**
-	 * 
+	 * Anadir una columna de datos
+	 * @param pDato
+	 * @param pIndex
 	 */
+	@SuppressWarnings("unused")
+	private void addColumn(T pDato, int pIndex)
+	{
+		ListIterator<List<T>> iterator = this.iterator();
+		while( iterator.hasNext() )
+		{
+			iterator.next().add(pDato, pIndex);;
+		}
+	}
+	public T search(int pFila, int pColumna)
+	{
+		return this.search(pFila).search(pColumna);
+	}
+
 	public void print()
 	{
-		System.out.println("\t Matriz");
-		System.out.println("-------------------------------------------------------------------------------");
-		ListIterator<List<T>> iterator = this._Matrix.iterator();
-		for(int x=0; iterator.hasNext(); x++ )
+		System.out.println(this.toString());
+	}
+
+	public String toString()
+	{
+		String result = "[ \n ";
+		ListIterator<List<T>> iterator = this.iterator();
+		while( iterator.hasNext() )
 		{
-			System.out.print(x+"   ");
-			iterator.next().print();
+			result += iterator.next().toString() + "\n ";
 		}
-		System.out.println();
+		result += "\n]";
+		return result;
+	}
+
+	public void set( T pDato, int pFila, int pColumna )
+	{
+		System.out.println(this.search(pFila).search(pColumna));
+		this.searchVertex();
 	}
 }
